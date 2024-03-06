@@ -1,0 +1,1185 @@
+Part 1: Biến, comments, build-in
+    1. Biến:
+      - Trong JavaScrip có phân biệt chữ hoa chữ thường (nên đặt tên biến theo kiểu như: fullName,totalMoney.....)
+      - Khai báo biến thì dùng var -> var age =20; 
+      - Chỉ sử dụng var nếu PHẢI hỗ trợ các trình duyệt web cũ
+      - Nhưng ta nên sử dụng let vì let tốt hơn -> let age=20;
+      - Có thể có dấu ';' hoặc không cũng được. Nếu không có thì phải xuống dòng.
+
+    2. Comments::
+      - Quá quen thuộc // là 1 dòng và /* */ là comments 1 khối
+      - Phím tắt : Ctrl + /
+
+    3. Built - in:
+      - Built - in là thuật ngữ nói về các hàm xây dựng sẵn trong JavaScrip
+      - Đây là một hàm built-in:
+        + Alert
+        + Console - > Dùng để debug (tạm thời) 
+          - Console.log('');
+          - Console.warn('');
+          - Console.error('');
+        + Confirm -> Dùng để xác nhận (Yes or No)
+          - confirm('');
+        + Prompt -> Dùng để xác nhận (có thể nhập vào)
+          -> prompt('');
+        + Set timeout -> Sau 1 khoảng thời gian nhất định thì thực hiện 1 lần 1 function nào đó
+          -> setTimeout(function (){
+             console.log('Đã sau '+Math.random())
+             }, 1000)
+          -> 1000 ở đây là 1000ms=1s là sau 1 giây thì sẽ thực hiện function in ra console.log('Đã sau '+Math.random())
+         + Set interval -> Sẽ thực hiện function đó sau 1 thời gian nhất định và cứ thực hiện nó mãi (Dịnh kì theo thời gian)
+          -> setInterval(function (){
+             console.log('Đã sau '+Math.random())
+             }, 2000)
+          -> Cứ sau 2s thì nó sẽ thực hiện function in ra console.log('Đã sau '+Math.random())
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 2: Toán tử, kiểu dữ liệu
+  1. Toán tử
+  - Gồm các toán tử sau:
+  + Toán tử số học - Arithmetic
+    -> +: Cộng
+    -> -: Trừ
+    -> *: Nhân
+    -> **: Lũy Thừa
+    -> /: chia
+    -> %: chia lấy dư
+    -> ++: Tăng 1 đơn vị. Example: ++a -> Tăng trước và a++ -> Tăng sau
+    -> --: Giảm 1 đơn vị. Example: --a-> Giảm trước và a-- -> Giảm sau
+  + Toán tử gán - Assignment
+    -> =
+    -> +=
+    -> -=
+    -> *=
+    -> /=
+    -> **=
+  + Toán tử so sánh - Comparison
+    -> == : Bằng
+    -> != : Không bằng
+    -> >  : Lớn hơn
+    -> <  : Nhỏ hơn
+    -> >= : Lớn hơn hoặc Bằng
+    -> <= : Nhỏ hơn hoặc Bằng
+    -> ===: Bằng tuyệt đối (khác với ==)  -> Nên sử dụng khi so sánh giữa 2 giá trị
+    -> !==: Khác tuyệt đối (khác với !=)  -> Nên sử dụng khi so sánh giữa 2 giá trị
+      => Trong này == và != là kiểu so sánh theo value còn === và !== là kiểu so sánh theo datatype với value
+         Example: let a=1;
+                  let b='1';
+                  log(a===b);
+
+  + Toán tử logic - Logical
+    -> && - And
+    -> || - Or
+    -> !  - Not
+  => Khi ta sử dụng toán tử so sánh và logic cùng 1 lúc thì chú ý sau:
+     - && là cố đi tìm cái sai còn || đi tìm cái đúng
+     - Nếu có toán tử so sánh thì khả năng cao trả về true or false. Nhưng nếu không có nó sẽ trả 1 giá trị không phải true or false
+       -> Example: let rs=2>1 &&1<0
+     - Toán tử &&
+     - Ví dụ ta có 1 biến let rs= 'A'&&'B'&&'C'&&'D'
+       -> Nếu ta in ra rs thì ra kết quả là D bởi nó sẽ xét từ trái quá 
+          nếu không có giá trị nào trong 6 Falsy thì nó sẽ gán giá trị cuối bên PHẢI
+     - Nhưng nếu ta có let rs= 'A'&&'B'&& null&&'D'
+       -> Nếu in ra kết quả là null vì có 1 cái thuộc 6 Falsy nên nó sẽ được gán vào rs
+     - Toán tử ||
+     - Ví dụ ta có 1 biến let rs= 'A'||'B'||'C'||'D'
+       -> Nếu ta in ra rs thì ra kết quả là A bởi nó sẽ xét từ trái qua nếu có 1 giá trị nào không trong 6 Falsy 
+          thì nó sẽ gán ngay giá trị đó mà không biết các giá trị sau
+     - Nhưng nếu ta có let rs= null||'B'||null||'D'
+       Nếu in ra thì kết quả là B vì khi gặp 1 giá trị nào trong 6 Falsy thì nó sẽ bỏ qua và tìm giá trị khác
+    + Toán tử spread (...)
+      - Giúp gọp 2 mảng lại với nhau thành 1 mảng dài hơn
+      - Giúp chuyển dữ liệu kiểu Set sang Array
+        Example:  const odd = [1,3,5];
+                  const combined = [2,4,6, ...odd];
+                  console.log(combined); // output: [ 2, 4, 6, 1, 3, 5 ]
+  2. Kiểu dữ liệu
+    - Muốn xác định kiểu dữ liệu gì dùng typeof
+      Example: console.log(typeof a)
+    2.1 Dữ liệu nguyên thủy - Primitive Data:
+      - Number
+      - String
+        -> Muốn xuất hiện kí tự trong chuỗi thì thêm \
+      - Boolean (true or false):
+        - Trong JavaScrip có tổng 6 toán tử sau nếu Convert qua Boolean thì được coi là Falsy
+          + 0                   -> typeof 0 là là ra number
+          + false               -> typeof false là ra boolean
+          + '' hoặc ""          -> typeof '' hoặc "" là ra string
+          + undefined           -> typeof undefined là ra undefined
+          + NaN (Not a number)  -> typeof NaN là ra number
+          + null                -> typeof null là ra object
+        - Ngoài 6 toán tử trên thì được coi là Truthy.
+          + Example: console.log(!!'hi');
+          + Tip: !!'hi' sẽ trở lại ban đầu
+          -> Có ngoại lệ nếu !!document.all sẽ là false
+          -> Mặc định document.all là false
+          -> document.all khi là toán hạng của toán tử so sánh == hoặc != sẽ là undefined
+          -> Khi typeof document.all sẽ trả về "undefined"
+      - Undefined
+        -> Tạo ra 1 biến nhưng không gán giá trị
+      - Null
+        -> Thể hiện không có giá nhưng vẫn được gán Example let isTrue=null
+        -> typeof null là object
+      - Symbol
+        -> Thể hiện tính duy nhất unique
+    2.2 Dữ liệu phức tạp - Complex Data:
+      - Function:
+      - Objects:
+        - Gồm 3 loại chính :
+          -> An Object:
+          -> An Array
+          -> A Date
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 3: Hàm
+  1. Hàm :
+    - Là khối mã
+    - Làm 1 việc cụ thể
+    - Khác với ngôn ngữ khác thì function có thể gán trong JavaScrip
+      Example:  let myFunction= function(){
+                    lert('Hello!!')
+                  }
+                  myFunction();
+  2. Loại Hàm:
+    - Built - in
+    - Tự định nghĩa gồm 3 loại:
+      + Declaration function: là hàm tạo ra ngay 1 function và phải có tên
+        -> Example: function declarationFunction() {}
+      + Expression function: là hàm được tạo ra dựa vào việc gán vào 1 biến và có thể có tên hoặc không
+        -> Example: let expressionFunction= function() {}
+      * Chú ý: Declaration function hơn Expression function là bạn có thể gọi Declaration function trước khi tạo nó gọi là Hoisting 
+               còn Expression function thì không
+      + Arrow function
+  3. Tính chất
+    - Không thực thi khi định nghĩa
+    - Sẽ thực thi khi được gọi
+    - Có thể nhận tham số
+    - Có thể trả về 1 giá trị
+    - Khi sử dụng this trong 1 function thì this đang trỏ đến tên của function đó
+  4. Tham số ( parameter ), Đối số ( argument )
+  - Example: function showMessage( message ){}
+           showMessage( 'Hi xin chào các bạn')
+    -> Với message ở trong showMessage( message ) là tham số ( parameter )
+    -> Với message ở trong showMessage( 'Hi xin chào các bạn') là đối số ( argument )
+  - Bạn có thể tạo function có nhiều tham số. Còn việc bạn không truyền hay truyền đối số là do bạn
+    -> Example: function showMessage( message, message2 )
+                showMessage( 'Hi xin chào các bạn') -> Thì message2 in ra sẽ là undefined
+  - Nếu bạn muốn truyền đối số quá nhiều thì trên hàm thay vì tạo nhiều tham số bạn có thể thay thế bằng arguments
+  - argument ở đây là 1 mảng lưu các đối số
+    -> Example: function showMessage( ){
+                  console.log(arguments)
+                }
+                showMessage('Log1','Log2','Log3')
+  - Ta có thể sử dụng vòng lặp For of để lấy các giá trị trong arguments
+     -> Example:  for(let param of arguments){
+                    myString+= `${param} -`
+                  }
+  5. Return 
+    - Hàm Built-in thì sẽ trả về nếu được gán vào 1 Biến
+    - Nếu ta không trả về gì mà in ra thì mặc định là undefined
+  * Chú ý: - Nếu đặt tên fucntion trùng thì khi gọi nó sẽ lấy cái function mới nhất vì function mới nhất sẽ ghi đè mấy function cũ
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 4: Chuỗi
+  1. Cách tạo 
+    - Có 2 cách tạo chuỗi:
+      + Cách 1: Là tạo bằng cách gán
+        -> Example: let fullName='Huy Pham'
+      + Cách 2: Là tạo thông qua từ khóa new
+        -> Example: let fullName= new String('Huy Pham')
+      => Nên dùng cách 1
+  2. Template String
+    - Template String (``) là 1 phương pháp tạo chuỗi linh hoạt hơn 
+      -> Example: `${arguments[i]} -`
+                  hoặc
+                  let name ='Huy';
+                  let message=`${name} `
+  3. Thuộc Tính
+    - Độ dài ( length )
+      Example:  let fullName ='Huy Pham'
+                console.log(fullName.length)
+    - Ví trí kí tự hoặc chuỗi cần tìm (indexOf)
+      Example:  let fullName ='Huy Pham'
+                console.log(fullName.indexOf('Huy'))
+      -> Nếu không tìm thấy trả về -1
+      -> Nếu muốn tìm 1 từ từ 1 vị trí nào đó thì ta có thay như sau -> fullName.indexOf('Huy',positionWant)
+    - Cắt chuỗi (slice(startIndex, endIndex))
+      Example:  let fullName ='Huy Pham'
+                console.log(fullName.slice(4,2));
+      -> Cắt trong JavaScript còn có thể cắt từ phải sang trái
+      -> Ví dụ muốn lấy chữ Pham thì ta có thể dùng chữ số âm -> console.log(fullName.slice(-4))
+    - Thay chuỗi (replace(OldString,NewString))
+      - Thay JS bằng JavaScript
+      Example:  let fullName ='Hoc JS tại F8!'
+                console.log(fullName.replace('JS','JavaScript'));
+      * Chú ý: Nếu nó có nhiều từ JS trở lên thì nó chỉ thay 1 cái. Để thay tất cả ta cần chỉnh thành /JS/g
+        ->  let fullName ='Hoc JS tại JS JS F8!'
+            console.log(fullName.replace(/JS/g,'JavaScript'));
+    - Đổi chữ hoa (toUpperCase hoặc toLocaleUpperCase)
+      Example:  let fullName ='Hoc JS tại F8!'
+                console.log(fullName.toUpperCase()) hoặc console.log(fullName.toLocaleUpperCase())
+    - Đổi chữ thường (toLowerCase hoặc toLocaleLowerCase)
+      Example:  let fullName ='Hoc JS tại F8!'
+                console.log(fullName.toLowerCase()) hoặc console.log(fullName.toLocaleLowerCase())
+    - Cắt bỏ dấu cách thừa ở 2 đầu (trim())
+      Example:  let fullName ='Hoc JS tại F8!'
+                console.log(fullName.trim())
+    - Cắt 1 chuỗi theo kí tự thành 1 mảng (split('characters')):
+      -> Cắt 1 chuỗi dựa vào 1 kí tự đặc biệt như ", ; ." hoặc dấu cách giống C++
+      Example:  let languages = 'JavaScript, PHP, Ruby'
+                console.log(languages.split(', '))
+    - Lấy 1 kí tự tại 1 vị trí (charAt(index))
+      Example:  let languages ='JavaScript'
+                let array=languages.split(' ');
+                console.log(array[0].charAt(0))
+      * Chú ý:  Nếu charAt tại vị trí không kí tự thì trả về '' 
+                Còn nếu sử dụng [position] tại ví trí không có kí tự thì trả về undefined
+    - Tìm 1 chuỗi hoặc 1 kí tự trong chuỗi (includes(string,position))
+      -> Trả về true or false
+      Example:  let languages ='JavaScript'
+                console.log(languages.includes('Java',position))
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 5: Number
+  1. Kiểu
+    - Có 2 kiểu số là:
+    + Dạng thông thường (64 bit IEEE-754)
+    + Dạng BigInt biểu thị số nguyên có độ dài tùy ý
+  2. Tính chất:
+      let number=123
+    - Number.isFinite(number)         -> Kiểm tra 1 số có phải hữu hạn hay không      -> Trả về true or false
+    - Number.isInteger(number)        -> Kiểm tra 1 số có phải số nguyên              -> Trả về true or false
+    - Number.parseFloat(number)       -> Chuyển đổi 1 chuỗi thành 1 số dấu phẩy động  -> Trả về 1 số
+    - Number.parseInt(number)         -> Chuyển đổi 1 chuỗi thành 1 số nguyên         -> Trả về 1 số
+    - Number.toFixed(number)          -> Làm tròn 1 số với số lượng số sau đầu phẩy   -> Trả về 1 chuỗi
+      ->  Example: let numberObject=1234.567
+          numberObject.toFixed(); // '1235'
+          numberObject.toFixed(1); // '1234.6'
+          numberObject.toFixed(6); // '1234.567890'
+    - number.toString()         -> Chuyển 1 số thành 1 chuỗi                    -> Trả về 1 chuỗi 
+      ->  Example:  (11).toString();    // '11'
+                    (18).toString();     // '18'
+                    (17.3).toString();   // '17.3'
+    - isNaN()                    -> Kiểm tra xem biến có phải chữ số và có phải là NaN hay không  -> Trả về true or false
+    * Chú ý:  isNaN() chỉ áp dụng cho hoàn toàn là chuỗi chứ không được là '123' nó vẫn trả về là false
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 6: Mảng
+  I.Cơ bản
+    1. Cách tạo
+      - Là một mảng như bao ngôn ngữ khác.
+      - Trong 1 mảng trong JavaScrip luôn mở bằng []
+      - Trong Array cũng có key và value nhưng key tự tăng và bắt đầu là 0
+      - Example:  let languages=[
+                      'JavaScript',
+                      'PHP',
+                      'Ruby',
+                      'Python',
+                      null,
+                      undefined,
+                      function(){
+                      },
+                      {},
+                      123,
+                  ]
+      * Chú ý: typeof {},[] là object luôn
+    2. Thuộc tính
+      - Array.isArray()   -> Kiểm tra biến có phải là mảng hay không 
+      - array.length      -> Kiểm tra số lượng phần tử của mảng
+      - array.toString()  -> Chuyển đổi 1 mảng thành 1 chuỗi (nhưng mặc định sẽ có dấu ,)
+      - array.join(kí tự) -> Chuyển đổi 1 mảng thành 1 chuỗi (thêm kí tự mong muốn giữa các phần tử)
+        -> Example: let languages=[
+                      'JavaScript',
+                      'PHP',
+                      'Ruby',
+                      'Python'
+                    ]
+                    log(languages.join(' - ')) -> JavaScript - PHP - Ruby - Python
+      - array.pop()                       -> Xóa phần tử cuối trong Mảng                      -> Trả về phần tử cuối đã Xóa
+        -> Nếu mảng rỗng mà vẫn pop() thì sẽ trả về undefined   
+      - array.push()                      -> Thêm 1 hoặc nhiều phần tử cuối cho Mảng          -> Trả về độ dài mới của mảng
+      - array.shift()                     -> Xóa 1 phần tử ở đầu Mảng
+        -> Nếu mảng rỗng mà vẫn shift() thì trả về undefined                                  -> Trả về phần đầu đã Xóa
+      - array.unshift()                   -> Thêm 1 hoặc nhiều phần tử cho đầu mảng           -> Trả về độ dài mới của mảng
+      - array.splice()                    -> Có thể xóa hoặc chèn phần tử cho Mảng
+        -> array.splice(index,number) với index là vị trí bắt đầu xóa trở đi và number là số phần tử muốn xóa
+        -> array.splice(index,number,strings) với index là vị trí cần chèn và string là các chuỗi chèn vào và number là số phần tử muốn xóa
+      - array.concact(array2)             -> Có thể nối mảng 2 vào mảng 1
+      - array.slice(startIndex,endIndex)  -> Cắt một vài phần tử hoặc cắt hết phần tử trong 1 mảng
+        -> Cách copy mảng nhanh là array.slice(0)
+  II.Phần sâu
+    1. Thuộc tính (Giúp tránh sử dụng Loop)
+      - forEach(function(currentValue,currentIndex)) -> Lấy từng từng phần tử trong mảng nhanh hơn không cần qua Loop   -> Không trả về giá trị
+        Example:  let courses=[
+                    {
+                        id: 1,
+                        name: 'JavaScript',
+                        coin: 250
+                    },
+                    {
+                        id: 2,
+                        name: 'HTML, CSS',
+                        coin: 0
+                    },
+                  ]
+                  courses.forEach(function (course,index){
+                    log(index,course)
+                  });
+        -> Vì không trả về nên forEach không sử dụng để gán
+        -> Khi truyền function vào 1 lệnh như forEach() được gọi là callback
+        -> ở đây course là từng object lấy ra trong mảng và index là vị trí của từng cái
+      - every(function(currentValue,currentIndex))  
+        -> Lấy tất cả phần tử để kiểm tra nếu sai 1 cái thì trả về sai luôn còn đúng hết mới trả về đúng  -> Trả về kiểu boolean
+        Example:  let isFree=courses.every(function (course,index){
+                    return course.coin===0
+                  });
+                  log((isFree)?'Tất cả đều miễn phí':'Không có vài cái mua')
+      - some(function(currentValue,currentIndex))     
+        -> Lấy tất cả để kiểm tra nếu đúng 1 cái thì trả về đúng luôn còn sai hết mới trả về sai          -> Trả về kiểu boolean
+        Example:  let isFree=courses.some(function (course,index){
+                    return course.coin===0
+                  });
+                  log((isFree)?'Tất cả đều miễn phí':'Không có vài cái mua')
+      - find(function(currentValue,currentIndex))    
+        -> Đi tìm kiếm theo yêu cầu nếu có trả về theo yêu cầu còn không có trả về undefined               -> Trả về value (Chỉ trả về 1 giá trị)
+        Example:  let courseJava=courses.find(function (course,index){
+                    return course.name==='JavaScript'
+                  });
+                  log(courseJava)
+      - filter(function(currentValue,currentIndex))  
+        -> Tương tự find() nhưng nếu muốn trả về nhiều hơn 2 giá trị                                        -> Trả về value (Nhiều giá trị thì trả về mảng)
+        Example:  let courseJava=courses.filter(function (course,index){
+                    return course.name==='JavaScript'
+                  });
+                  log(courseJava)
+      - map(function(currentValue,currentIndex,originAray))     
+        -> Tương tự forEach() nó cũng duyệt qua từng phâng tử nhưng có trả về nếu Muốn                      -> Trả về 1 mảng
+        Example:  let newCourses=courses.map(function(course,index,oirginArray){
+                    return {
+                        id: course.id,
+                        name: `Khoa hoc: ${course.name}`,
+                        coin: course.coin,
+                        coinText: `Gia: ${course.coin}`,
+                        index: index,
+                        origin: oirginArray
+                    }
+                  })
+                  log(newCourses)
+      - reduce(function(accumulator,currentValue,currentIndex,originAray),initialValue) 
+        -> Tương tự accumulate trong C++                                                                    -> Trả về 1 giá trị
+        Example:  let i=0;
+                  function coinHandler(accumulator,currentValue,currentIndex,originArray){
+                    ++i;
+                    logt({
+                      'Lượt chạy': i,
+                      'Biến tích trữ':accumulator
+                  })
+                  return accumulator+currentValue.coin
+                  }
+                  let totalCoin=courses.reduce(coinHandler,0)
+                  log(totalCoin) 
+        * Chú ý: -Trong reduce thì giá trị initialValue = 0 thì ban đầu accumulator cũng sẽ gán bằng initialValue
+                 -Muốn tích trữ cái gì thì return cái đó
+                 -Trong reduce ta vẫn có thể không tạo intialValue nhưng nếu giá trị trả về khác kiểu giá trị trong mảng thì phải tạo initialValue
+                 -Khi không tạo intialValue thì accumulator sẽ được gán phần tử đầu tiên của mảng và currentValue sẽ được gán giá trị thứ 2
+      - includes(object,position) -> Kiểm tra xem mảng có chứa phần tử đó hay không                         -> Trả về true or false
+        Example:  let arr=[1,2,3,4,5]
+                  log(arr.includes(1))
+      * Chú ý:  Đối với 1 mảng hãy cố gắng sử dụng Loop theo kiểu forEach() để tránh việc sử dụng Loop thông thường 
+                -> Vì khi sử dụng Loop thông thường ta có thể gán array.length=number bằng 1 số bất kì dẫn đến sai
+      - object.hasOwnProperty(key)  -> để kiểm tra xem object tại key đó có phải elements có thuộc tính hay elements trong prototyp -> Trả về true or false
+    2.Empty elements trong mảng
+      - Trong mảng có thể chứa các empty elements -> Kiểu là undefined
+        1.Duyệt qua Key thông qua For in 
+        ->  Khi duyệt Key thông qua For in trong phương thức định nghĩa thì nó sẽ duyệt qua các elements trong prototype
+            Example:  Array.prototype.forEach2=function(callback){
+                        for(let key in this)
+                          log(key)
+                      }
+                      languages.forEach2(function(language,index,originArray){
+                      })
+            - Khi in ra sẽ có 1 dòng forEach2 đó chính là elements trong prototype của Array
+            - Để tránh in các elements trong prototype của Array thì ta có thể sử dụng hasOwnProperty()
+              Example:  Array.prototype.forEach2=function(callback){
+                          for(let key in this)
+                            if(this.hasOwnProperty(key))
+                              log(key)
+                        }
+                        languages.forEach2(function(language,index,originArray){
+                        })
+          2. Duyệt qua Value thông qua For of
+          -> Khi duyệt qua Value thông qua For of thì nó cũng sẽ duyệt qua các empty elements với elements trong mảng
+            Example:  Array.prototype.forEach2=function(callback){
+                        for(let value of this)
+                          log(value)
+                      }
+                      languages.forEach2(function(language,index,originArray){
+                      })
+            - Để tránh in ra các empty elements thì kiểm tra value không có dạng undefined
+              Example:  Array.prototype.forEach2=function(callback){
+                          for(let value of this)
+                            if(value!==undefined)
+                              log(value)
+                        }
+                        languages.forEach2(function(language,index,originArray){
+                        })
+      - Tính chất:
+        + forEach() không duyệt qua các empty elements -> Nhưng forEach2() phương thức tự định nghĩa thì duyệt qua empty elements
+        + filter() không duyệt qua các empty elements -> Nhưng filter2() không chấp nhận những empty elements 
+        + Nếu muốn xóa empty elements thì ta có thể sử dụng filter() để lọc
+        + Nếu muốn xóa empty elements và các giá trị falsy thì ta có thể sử dụng filter(Boolean)
+        + Nếu muốn xóa empty elements và các giá trị falsy và 0 thì ta có thể sử dụng filter(Number)
+        + Nếu muốn xóa empty elements và các giá trị falsy và 0 và '' thì ta có thể sử dụng filter(String)
+                
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 7: object
+  1. Đối tượng 
+    - Trong 1 Objects trong JavaScrip luôn mở {} 
+    - Trong Objects luôn có key và value
+      Example:  let myEmail='email';
+                let myInfo ={
+                  name: 'Huy Pham',
+                  age: 18,
+                  address: 'Đà Nẵng',
+                  getName: function(){
+                    return this.name
+                  }
+                  [myEmail]: 'Phamvahuy2004@gmail.com'
+                };
+  2. Thuộc Tính
+    - object.key= value           
+    Hoặc object['name-key']= value   -> Thêm 1 cặp key và value vao trong 1 object
+    Hoặc object[biến]= value
+      Example:  let my-email: 'email'
+                myInfo.email= 'Phamvahuy2004@gmail.com'
+                myInfo['my-email']= 'Phamvahuy2004@gmail.com'
+                myInfo[my-email]='Phamvahuy2004@gmail.com'
+
+    * Chú ý:  - Nếu muốn đặt tên key trong lúc tạo object có các kí tự đặt biệt thì ta chuyển key thành 1 chuỗi -> 'my-name': 'Huy Pham' 
+              - Nếu lấy value của key không tồn tại thì trả về undefined
+              - this.name ở ví dụ trên là myInfo.name hay this=myInfo (giống Java)
+              - Phương Thức là funtcion trong Object
+              - Thuộc tính là cặp key value trong Object
+
+    - object.key                    
+    Hoặc object['name-key']          -> Lấy ra value của key đó trong object
+    Hoặc object[biến]               
+        Example: Giả sử trong object có key address:'Đà Nẵng' và 1 biến ghi addressKey ='address'
+                 -> Ta có thể thông qua addressKey để lấy được value trong object bằng cách object[addressKey]
+
+    - delete object.key              -> Xóa 1 cặp key và value
+  3. Object Constructor (Khung xây dựng)
+    - Khi tạo Object Constructor thì nên viết hoa chữ cái đầu
+    - Khá giống Java nhưng tạo Object Constructor thông qua Function 
+      Example:
+      function User(firstName,lastName,avatar){
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.avatar=avatar
+        this.getName=function(){
+          return `${this.firstName} ${this.lastName}`
+        }
+      }
+      let author=new User('Huy','Phạm','Avatar');
+      let user=new User('Hải','Lê','Avatar');
+      -> Đây là cách để tạo Object Constructor
+    - Ta cung có thể in ra constructor của 2 đối tượng trên
+      -> console.log(author.constructor)
+    - Ta cũng có thể kiểm tra constructor của 1 đối tượng có giống với constructor mà ta thấy hay không
+      -> console.log(author.constructor === User)      
+  4. Object Prototype (Các tính chất)
+    - Nếu ta muốn thêm thuộc tính chung cho Constructor thì dùng Object Prototype
+    - Còn nếu muốn thêm thuộc tính riêng ta sử dụng tênObject.tênThuộcTính
+    - Sau khi ta tạo 1 Object Constructor thì đê thêm các thuộc tính mới thì ta cần Object Prototype để thêm
+      ->  Với ví dụ ở trên ta muốn trong Constructor có thêm thuộc tính className thì 
+          ->  User.prototype.className='22T1'
+      ->  Ta cũng có thể thêm 1 function 
+          ->  User.prototype.getClassName=function(){
+                return this.className;
+          }
+  5. Date
+    - Cách tạo đổi tượng Date
+      -> let date=new Date();
+    - date.getFullYear()    -> Lấy ra năm
+    - date.getMonth()+1     -> Lấy ra tháng
+    - date.getDate()        -> Lấy ra ngày
+    - date.getHours()       -> Lấy ra giờ
+    - date.getMinutes()     -> Lấy ra phút
+    - date.getSeconds()     -> Lấy ra giây
+  6. Math
+    - Giống với các ngôn ngữ Khác
+    - Math.PI       -> Số PI
+    - Math.round()  -> Làm tròn Số
+    - Math.abs()    -> Trị tuyệt Đối
+    - Math.ceil()   -> Làm tròn lên
+    - Math.floor()  -> Làm tròn xuống
+    - Math.random() -> Lấy số ngẫu nhiên (từ 0 đến 1)
+      -> Có thể có số thực vì vậy cần floor để thành số nguyên
+    - Math.min()    -> Lấy số nhỏ nhất
+    - Math.max()    -> Lấy số lớn nhất
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 8: Lệnh rẽ nhánh
+  1. If - else, If - else If
+  2. Switch case
+    - Sử dụng === để kiểm tra
+  3. Toán tử 3 ngôi (Ternary operator)
+    - (condition)?answer_1:answer_2
+    - Example: (course.coin>0)?`${course.coin} coin`:'Miễn Phí'
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 9: Vòng lặp
+  1. For (giống như bao ngôn ngữ khác)
+  2. For/in -> Lấy ra các key trong object, mảng hoặc là chuỗi 
+      Example:  let myInfo={                
+                  name: 'Huy Pham',
+                  age: 20,
+                  address: 'Đà Nẵng',
+                }
+      - Thông qua key ta cũng qua cũng lấy ra được value
+                for(let key in myInfo){
+                    log(key)
+                    log(myInfo[key])
+                }
+      - Đối với mảng và chuỗi thì key là số 
+  3. For/of -> Lấy ra các value trong mảng hoặc là chuỗi (có thể cho object nhưng thông qua 1 cách)
+      Example:  let myArray=[
+                {
+                      name: 'Huy Phạm',
+                      age: 18,
+                      addres: 'Đà Nẵng',
+                  },
+                  {
+                      name: 'Hải Lê',
+                      age: 21,
+                      addres: 'Quản Trị',
+                  }
+                ]
+                for(let value of myArray){
+                    log(value);
+                }
+      - Nếu muốn áp dụng cho object ta phải sử dụng Object.keys(object)   -> Object.keys(object) sẽ chuyển các key của object sang 1 mảng
+      - Ta cũng có thể sử dụng                      Object.values(object) -> Object.values(object) sẽ chuyển các value của object sang 1 mảng
+        Example:  let myInfo={                
+                    name: 'Huy Pham',
+                    age: 20,
+                    address: 'Đà Nẵng',
+                  }
+                  for(let key of Object.keys(myInfo)){
+                    log(key)
+                  }
+    4. While (giống như bao ngôn ngữ khác)
+    5. Do..While (giống như bao ngôn ngữ khác)
+    6. Đệ quy (Quá ớn lướt)
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 10: CallBack
+  - Là một hàm
+  - Truyền qua đối số qua 1 hàm khác
+  - Giải thích đơn giản hơn thì CallBack là hàm A được truyền vào tham số hàm B và hàm A được gọi trong chính hàm B đó
+    Example:  function myFunction(param){
+                if(typeof param ==='function'){
+                  param(10)
+                }
+              }
+              function myCallBack(value){
+                  console.log('Value:',value)
+              }
+              myFunction(myCallBack)   
+  - Các thuộc tính ở Phần sâu của mảng đều sử dụng CallBack  
+    Example: 
+    Array.prototype.myMap=(function(callback){
+      let Output=[]
+      let i=0
+      for(let value of this){
+        Output.push(callback(value,i))
+        ++i
+      }
+      return Output;
+    })
+    const numbers = [1, 2, 3];
+
+    console.log(numbers.myMap(function (number) {
+        return number * 2;
+    })) // Output: [2, 4, 6]
+
+    console.log(numbers.myMap(function (number, index) {
+        return number * index;
+    })) // Output: [0, 2, 6]
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 11: HTML DOM, DOM CSS, DOM Event, EventListener (DOM = Document Object Model)
+  I. HTML DOM (DOM = Document Object Model)
+    1. Giới thiệu
+      - HTML DOM là các tiêu chuẩn tuân theo W3C
+      - Trong HTML DOM được xây dựng bởi các node và node có 3 thành phần
+      - 3 thành phần đó là: 
+        + Elements    -> Example: <h1>, <h2>, <h3>, <p>, <a> ... là các thành phần
+        + Attribute   -> Example: class, id, title .... là các thuộc tính
+        + Text        -> là các dòng text có trong body
+      - HTML DOM khác với JavaScript. JavaScript cung cấp bộ công cụ để lấy được các thành phần trong HTML DOM
+    2. Cách thức 
+      - Để lấy được 3 thành phần như elements,Attribute,Text thì luôn đi qua Document
+    3. Tính chất
+      + Document.write(String)  -> Ghi vào HTML nội dung gì đó
+      - Lấy Elements:
+        + ID                      -> document.getElementById('String')          -> Nếu không có id thì trả về null
+        + className               -> document.getElementsByClassName('Sring')   -> Trả về HTML collection (nếu không có thì HMTL Collection rỗng)
+        + tag(lấy thông qua thẻ)  -> document.getElementsByTagName('h2')        -> Trả về HTML collection (nếu không có thì HMTL Collection rỗng)
+        + CSS selector            -> document.querySelector('.name' đối với class và '#name' đối với id) 
+              ->  Example: let headingNode= document.querySelector('html .heading')
+          -   Nó sẽ trả về phần tử đầu tiên. Nếu muốn select những thằng con theo số thứ tự thì dùng nth-child(number)
+              -> Example: let headingNode= document.querySelector('html .heading:nth-child(number)'); 
+          -   Nếu muốn select tất cả thẻ con thì ta có thể sử dụng querySelectorAll -> Trả về theo NodeList
+              Example: let headingNode= document.querySelectorAll('html .heading')
+        + HTML collection (giống với mảng nhưng không có các phương thức như reduce, map, filter...)
+          - Trong HTML Collection có thể lấy một số thẻ mà không mà không cần tagName như thông thưòng
+            -> Ví dụ thẻ forms
+            Example:  let documentForms=document.forms;
+                      log(documentForms['form-2'])
+      * Chú ý:  - Khi sử getElementsByClassName('Sring'),getElementsByTagName('h2') trả về HTML collection
+                - Vậy muốn trả về 1 element thì nên dùng id hoăc querySelector 
+        + Ngoài ra ta cũng có 1 cách để lấy được 
+          -> Example: let boxNode= document.querySelector('.box-1')
+                      log(boxNode.querySelectorAll('li'))
+      - Thêm 1 element trong 1 element có sẵn:
+        - Để thêm 1 element trong 1 element có sẵn thì ta cần phải tạo 1 element mới và sau đó thêm vào element có sẵn
+        + innerHTML (Thuộc tính của element)              -> element.innerHTML='<h1>Heading</h1>'     -> Tạo 1 element mới trong element có sẵn 
+                                                          -> log(element.innerHTML)                   -> Lấy ra innerHTML của element
+          -> không chỉ thêm 1 element mới vào element có sẵn nó còn thêm cả các thuộc tính và text của element mới đó
+            Examples: boxElement.innerHTML=`<h1 class='heading'>Heading</h1>` (Thêm Attribute)
+                      boxElement.innerHTML=`Heading` (Thêm Text)
+        + outter (Thuộc tính của element)                 -> element.outterHTML='<h1>Heading</h1>'    -> Viết đè 1 element mới thay cho thằng cha
+                                                          -> log(element.outterHTML)                  -> Lấy ra outterHTML của element
+          -> không chỉ ghi đè vào element cũ, element mới còn thêm cả các thuộc tính và text 
+            Examples: boxElement.outterHTML=`<h1 class='heading' style="color: red;">Heading</h1>` (Thêm Attribute)
+                      boxElement.outterHTML=`Heading` (Thêm Text)
+      - Lấy Attribute:
+        - Để tương tác với Attribute thì ta cần phải lấy được Element trước
+        - Sau khi lấy được Element thì ta có thể thêm bằng cách:
+          - Cách 1: Áp dụng cho các Attribute có sẵn và có thể thêm
+            + title                   -> element.title='String'       -> Tạo Attribute title cho element
+            + id                      -> element.id='String'          -> Tạo Attribute id cho element 
+            + class                   -> element.className='String'   -> Tạo Attribute class cho element
+            + href                    -> element.href='String'        -> Tạo Attribute href cho thẻ a
+          - Cách 2:Áp dụng cho các Attribute có thể không hợp lệ và không có sẵn
+            + setAttribute('name','value')  -> element.setAttribute('name','value')  -> Tạo Attribute name cho element
+            + getAttribute('name')          -> element.getAttribute('name')          -> Lấy ra Attribute name của element
+            + removeAttribute('name')       -> element.removeAttribute('name')       -> Xóa Attribute name của element
+          * Chú ý:  Nếu Attribute có sẵn và hợp lệ ta có thể dùng element.Attribute và element.Attribute='value'
+                    Nếu Attribute không có sẵn và không hợp lệ thì ta dùng setAttribute và getAttribute
+                    
+      - Lấy Text:
+        - Để tương tác với Text thì ta cần phải lấy Element trước 
+        + innerText (Thuộc tính của element)              -> element.innerText='String' -> Tạo 1 innerText cho element  
+                                                          -> log(element.innerText)     -> Lấy ra innerText của element
+        + textContent (Thuộc tính của element và text)    -> element.textContent='String' -> Tạo 1 textContent cho element
+                                                          -> log(element.textContent)       -> Lấy ra textContent của element
+        * Chú ý:  Sự khác nhau giữa innerText và textContent là 
+                    -> innerText sẽ lấy ra những nội dung mà người dùng nhìn thấy. Nếu có thuộc tính ẩn thì sẽ không thấy
+                    -> textContent sẽ lấy toàn bộ nội dung bao gồm cách trình bày và loại bỏ các thuộc tính ẩn đi.
+                    -> set nội dung innerText giống với get textContent
+                    -> set nội dung textContent giống với get innerText
+        * Một số Thuộc tính khá qua trọng
+          + Attributes        -> Trả về 1 mảng các tính chất của 1 thẻ như là class,id,style....
+          + baseURI           -> Trả về link web bao gồm tất cả
+          + chilElementCount  -> Trả về số lượng element con
+          + childNodes        -> Trả về số lượng element,text
+          + children          -> Trả về số lượng element (không tính text)
+          + classList         -> Trả về số lượng lớp của element
+          + firstChild        -> Trả về node đầu tiên element hoặc Text
+          + firstElementChild -> Trả về thẻ đầu tiên
+          + nodeType          -> Trả về 1 nếu là element, 2 nếu là Attribute, 3 nếu là text 
+          + tabIndex          -> Khi bấm tab nó sẽ nhảy đi đâu
+  II. DOM CSS
+    1. Giới thiệu
+      - DOM CSS đơn giản là thêm style cho các element
+    2. Hình Thức
+      - Set style: 
+        - DOM CSS là thêm style cho các element nên hình thức là
+          element.style.properties='String'
+          Example:  let boxElement = document.querySelector('.box');
+                    boxElement.style.width="100%";
+                    boxElement.style.height='100px'
+                    boxElement.style.backgroundColor='red' 
+        -> Cách viết nhanh hơn:
+          Example:  let boxElement = document.querySelector('.box');
+                    Object.assign(boxElement.style,{
+                      width:'100%',
+                      height:'100px',
+                      backgroundColor:'green'
+                    })
+          -> Sử dụng Object.assign(element.style,object) để thêm nhiều style cho element
+      - Get style:
+    3. ClassList Property
+      - Như ở trên classList trả về số lượng lớp của element
+      - Trả về kiểu dữ liệu DOMTokenList khá giống mảng nhưng không có các phương thức như reduce, map, filter...
+      - Example:  let boxElement=document.querySelector('.box')
+                  log(boxElement.classList)
+      - Các phương thức chính của ClassList là:
+        + add('String')         -> Thêm 1 class vào element  -> boxElement.classList.add('box-2')
+          - Nếu trong element có 1 class trùng với class được thêm thì nó coi là 1 và độ dài DOMTokenList không tăng
+          - Thêm nhiều class add('String','String',....)
+        + contains('String')                 ->  Kiểm tra trong 1 element có tên class đó không 
+        + remove('String')                   ->  Xóa 1 class trong element
+        + replace('oldString','newString')   ->  Thay thế 1 class thành 1 class mới 
+        + toggle('String')                   ->  Sử dụng theo cơ chế nếu element có tên class đó thì nó sẽ remove, còn chưa có thì sẽ add vào
+  III. DOM Event
+    1. Attribute Event
+      - Thêm trực tiếp inline của thẻ
+        -> Khi thêm kiểu này thường sẽ có từ on trước sự kiện 
+        Example:  <button onclick="alert('Hello')">Click me</button>
+    2. Assign event using the element node
+      - Cấu trúc : let element.event= function(e){}
+      - Thêm thông qua file riêng JS
+        -> Khi thêm kiểu này thường sẽ có từ on trước sự kiện 
+        Example:  let h1Elements=document.querySelectorAll('h1')
+                  h1Elements.forEach(function(h1Element){
+                      h1Element.onclick =function(e){
+                        log(e.target.innerHTML)
+                      }
+                  })
+    3. Một số event
+      + click           -> Xảy ra sự kiện khi nhấn nút
+      + change          -> Xảy ra sự kiện khi thay đổi giá trị của input (nhưng phải thoát ra chỗ nhập)
+      + input           -> Xảy ra sự kiện khi nhập nội dung cho input
+      + keyup           -> Xảy ra sự kiện khi thả nút nào đó
+      + keydown         -> Xảy ra sự kiện khi nhấn xuống nút nào đó
+      + keypress        -> (Tổ hợp của keyup và keydown) Xảy ra sự kiện khi nhấn nút nào đó
+      * Chú ý:  Đa số sự kiện của input đều sử dụng change trừ nhập sử dụng input
+      + preventDefault  -> Dùng để loại bỏ hành vi mặc định của trình duyệt đối với 1 số thẻ 
+                          (Ví dụ khi bấm thẻ a là qua đường dẫn khác Ngăn chặn qua)
+        Example:  let aElements = document.getElementsByTagName('a');
+                  log(aElements);
+                  [...aElements].forEach(function(element){
+                      element.addEventListener('click',function(e){
+                        if(!e.target.href.startsWith('https://www.w3schools.com/jsref/dom_obj_event.asp')){
+                          e.preventDefault();
+                        }
+                      })
+                  })
+      + stopPropagation -> Dùng để loại bỏ sự kiện nổi bọt của các thẻ con -> Áp dụng cho các thẻ con 
+                          (Muốn áp dụng cho con mà không cho cha)
+        Example:  let divElement=document.querySelector('.box')
+                  let pElement=document.querySelector('.box p')
+                  divElement.addEventListener('click',function(){
+                    log('Div')
+                  })
+                  pElement.addEventListener('click',function(e){
+                    e.stopPropagation()
+                    log('P')
+                  })
+  IV. EventListener
+    - Tương tự DOM Event thì EventListener cũng giúp các element thêm các sự kiện cho riêng nó
+    1. Thêm sự kiện
+      - Cấu trúc: element.addEventListener('event',nameFunction hoăc function(e){})
+      Example:  let h1Elements=document.querySelectorAll('h1')
+                h1Elements.forEach(function(h1Element){
+                    h1Element.addEventListener('click',function(e){
+                      log(e.target.innerHTML)
+                    })
+                })
+    2. Xóa sự kiện
+      - Cấu trúc: element.removeEventListener('event',nameFunction hoăc function(e){})
+      Example:  let buttonElement = document.querySelector('button');
+                function clickHandler(e){
+                    log('Viec 1')
+
+                    log('Viec 2')
+
+                    alert('Viec 3')
+                }
+                buttonElement.addEventListener('click',clickHandler);
+                setTimeout(() => {
+                  buttonElement.removeEventListener('click',clickHandler)
+                },3000)
+    * Chú ý:  - Sự khác nhau giữa DOM Event và EventListener là:
+                +  Sử dụng DOM Event khi sự kiện đơn giản và không có nhu cầu xóa đi
+                +  Sử dụng addEventListener khi sự kiện phức tạp và nhu cầu xóa đi
+                +  addEventListener có thể thêm nhiều lần và theo thứ tự                     ->       DOM Event thì chỉ thêm được 1 sự kiện 1 lần
+                +  addEventListener có thể xóa nhanh hơn và xóa các function không cần thiết ->       DOM Event thì không thể xóa nhanh chỉ xóa bằng cách gán function trống
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 12: JSON, Fetch, Postman
+  I. JSON
+    1. Giới thiệu
+      - Là một định dạng dữ liệu (Mặc định luôn là chuỗi)
+      - Stand for JavaScrip Object Notation
+      - JSON: Number, Boolean, String, Null, Array, Object
+      - Thông qua thao tác mã hóa (Encode)    -> Stringify    -> Từ JavaScript types sang JSON
+      - Thông qua thao tác giải mã (Decode)   -> Parse        -> Từ JSON sang JavaScript types
+      * Chú ý:  Khi ngăn cách các key và value dạng chuỗi trong JSON dùng dấu "" (Thông thường là: String, Array, Object)
+      Example:  let listJSON=[
+                  '1',
+                  'true',
+                  'null',
+                  '"Huy Pham"',
+                  '{"name":"Huy Pham","age":18}',
+                  '["JavaScripr","PHP","Python"]'
+                ]
+    2. Cách Thức
+      1. Chuyển JavaScript types sang JSON
+        - Ta sẽ sử dụng JSON.stringify(name) để chuyển đổi JavaScript types sang JSON;
+        Example:  let array=["JavaScript","PHP","Go"];
+                  let JSON=JSON.stringify(array);
+                  log(JSON)
+      2. Chuyển JSON sang JavaScript types
+        - Ta sẽ sử dụng JSON.parse(name) để chuyển đổi JSON sang JavaScript types;
+        Example:  let JSON='["JavaScript","PHP","Go"]';
+                  let array=JSON.parse(JSON);
+                  log(array)
+    II. Promise
+      1. Sync/Async
+        - Sync : là đồng bộ trong JavaScript
+          Example:  console.log('Start');
+                    console.log('End');
+        - Async : là bất đồng bộ trong JavaScript
+          -> Có một số hàm gây bất đồng bộ như: setTimeout, setInterval, fetch, XMLHttpRequest, file reading, request animation frame
+          -> Vì vậy ta sử dụng callback để xử lý bất đồng bộ
+          Example:  setTimeout(() => {
+                        console.log('Start');
+                    }, 1000);
+                    console.log('End');
+        - Pain Point: 
+          + Callback Hell   -> Quan tâm khi sử dụng callback
+          + Pyramid of Doom -> Quan tâm khi viết code
+          + Khó đọc, khó hiểu, khó bảo trì
+          => Promise giúp giải quyết 2 vấn đề trên
+      2. Lý thuyết Promise
+        2.1. Giới thiệu
+          - Giúp ta xử lý CallBack Hell và Pyramid of Doom
+        2.2. Cấu trúc 
+          - Cấu trúc xây dựng Promise
+            Example: let promise=new Promise(function(resolve,reject){});
+          - Theo cấu trúc trên thì mỗi khi ta gọi new Promise thì ngay lập tức nó sẽ thực thi function trước khi nhận giá trị trả về
+          - resolve trong function là thành công
+          - reject trong funtion là thất bại
+            -> Trong function khi thực thi phải gọi resolve hoặc reject để xử lý -> Nếu không gọi dẫn đến Memory Leak
+        2.3. Trạng thái:
+          - Promise có 3 trạng thái:
+            + Pending :  Trạng thái chờ thành công hay thất bại (Đang Memory Leak)
+            + Fulfilled: Trạng thái biết là thành công 
+            + Rejected : Trạng thái biết là thất bại
+        2.4. Cách sử dụng
+        - Ta có thể sử dụng promise như sau:
+          + promise.then(function(){})      -> CallBack trong then được gọi khi resolve() được gọi
+          + promse.catch(function(){})      -> CallBack trong catch được gọi khi reject() được gọi
+          + promise.finally(function(){})   -> CallBack trong finally được gọi khi resolve() hoặc reject() được gọi
+          Example:  let promise=new Promise(
+                    function(resolve,reject){
+                        let isTrue=true;
+                        if(isTrue){
+                            resolve('Thành công')
+                        }
+                        else{
+                            reject('Có Lỗi')
+                        }
+                        
+                    });
+                    promise .then(function(message){
+                                log(message)
+                            })
+                            .catch(function(message){
+                                log(message)
+                            })
+                            .finally(function(){
+                                log('Done!')
+                            })
+        5. Tính chất
+          - Chain (Quan trọng): Tính chất chuỗi của Promise
+            - Ta có thể đưa giá trị từ promise về then
+            - Ta có thể sử dụng giá trị then ban đầu để các then sau 
+            Example:  let notHell=new Promise((resolve,reject) => {
+                        resolve(1)
+                      })
+                      notHell
+                          .then(function(value){
+                              return value +1;
+                          })
+                          .then(function(value){
+                              return value +1;
+                          })
+                          .then(function(value){
+                              return value +1;
+                          })
+                          .then(function(value){
+                              return value +1;
+                          })
+                          .then(function(value){
+                              log(value)
+                          })
+              -> Giải thích code là: ban đầu notHell là 1 promise. Trong function gọi resolve(1), giá trị 1 sẽ đưa về then đầu tiên
+              -> Trong then đầu tiên ta sẽ trả về value +1, value +1 sẽ đưa về then tiếp theo và cứ như vậy.
+              -> Kết quả thu được là 5
+              * Chú ý: Nếu resolve không có đối số thì .then(function()) không có tham số
+              Hoặc ta có cách viết khác phức tạp hơn:
+              function sleep(ms){
+                return new Promise(resolve=>{
+                    setTimeout(resolve,ms)
+                })
+              }
+              sleep(1000)
+                  .then(function(){
+                      log(1)
+                      return sleep(1000)
+                  })
+                  .then(function(value){
+                      log(2)
+                      return sleep(1000)
+                  })
+                  .then(function(value){
+                      log(3)
+                      return sleep(1000)
+                  })
+                  .then(function(value){
+                      log(4)
+                      return sleep(1000)
+                  })
+          - Promise.resolve(argument)       -> Đây là tính chất resolve trong promise và luôn trả về đúng hay .then
+          - Promise.reject(argument)        -> Đây là tính chất reject trong promise và luôn trả về sai hay .catch
+          - Nếu ta muốn chạy song song các promise thì sử dụng Promise.all([promise1, promise2, promise3])
+            -> Promise.all trả về 1 promise 
+            -> Sau đó ta thêm .then thì tham số ở then sẽ là 1 mảng giữa 3 phần tử promise1, promise2, promise3
+            -> Khi chạy song song nếu sai 1 promise dẫn đến sai hết
+    III. Fetch
+      1. Giới thiệu
+        - fetch(API) là 1 Web API có nhiệm vụ gọi 1 API từ phía Backend cung cấp giúp các bạn lấy ra những thông tin cần thiết để hiển thị ra giao diện.
+        - Fetch là 1 hàm trong JavaScript giúp ta gửi request đến server và nhận response từ server
+        - Fetch trả về 1 promise
+          -> API (Application Programming Interface): là cổng kết nối giữa các phần mềm hay đơn giản là URL
+      2. Quy trình
+        - Backend -> API (URL) -> Fetch -> JSON/XML
+          -> JSON.parse -> JavaScript types
+          -> Render ra giao diện với HTML
+      3. Cấu trúc 
+        const API= 'URL';
+        fetch(API)
+        .then(function(response){
+            return response.json();
+        }
+        )
+        .then(function(data){
+            log(data)
+        })
+        .catch(function(error){
+            log('Lỗi')
+        })
+        -> Giải thích : fetch(API) trả về promise nên ta cần có then hoặc catch ở sảu
+        -> Trong then đầu tiên ta sẽ trả về được response sau đó hàm response.json() để chuyển đổi JSON sang JavaScript types
+        -> Ta sẽ được dữ liệu cần thiết
+        Examples: 
+        function postHandler(data){
+        let ulElement=document.getElementById('comment-block')
+        let htmls=data.map(function(post){
+            return `<li>
+                <h2>${post.title}</h2>
+                <p>${post.body}</p>
+            </li>`;
+        })
+        log(htmls)
+        ulElement.innerHTML=htmls.join('\n');
+        }
+        const API= 'https://jsonplaceholder.typicode.com/posts';
+        fetch(API)
+        .then(function(response){
+            return response.json();
+        }
+        )
+        .then(postHandler)
+        .catch(function(err){
+            log('Có lỗi')
+        })
+      4. JSON Server
+        - Dùng để Fake API / Mock API server
+        - Dùng trong quá trình học, hoặc tự tạo API
+        - npm stand for node package manager
+          -> Các lệnh để tạo ra JSON Server (Chạy trong Terminal)
+            + npm init 
+            + npm install json-server
+            + thêm trong package.json dòng "start": "json-server --watch db.json"
+            + npm start
+        - Có 4 thao tác tương tác dữ liệu CRUD
+          + Create : Tạo mới              -> POST
+          + Read   : Đọc dữ liệu          -> GET
+          + Update : Cập nhật dữ liệu     -> PUT/PATCH
+          + Delete : Xóa dữ liệu          -> DELETE
+      5. REST API:
+        - REST stand for REpresentational State Transfer 
+        - là một tiêu chuẩn dùng trong việc thiết kế API cho các ứng dụng web
+      6. Postman
+        - Tại sao lại sử dụng Postman
+          -> Vì Postman có thể nhét các phương thức vào giao thức để tương tác với dữ liệu
+          -> Ví dụ như GET, POST, PUT, DELETE
+          -> Nếu không sử dụng mà chỉ sử dụng thông qua trình duyệt ta chỉ có sử dụng GET 
+             mà không thể dùng các phương thức khác 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Exercise (Quan trọng):
+Câu 1: Xử lý các hàm forEach, find, filter, every, some, map, reduce
+  var courses = [
+      {
+          id: 1,
+          name: 'JavaScript',
+          coin: 200,
+      },
+      {
+          id: 2,
+          name: 'Ruby',
+          coin: 0,
+      },
+      {
+          id: 3,
+          name: 'PHP',
+          coin: 300,
+      },
+      {
+          id: 4,
+          name: 'C++',
+          coin: 400,
+      },
+      {
+          id: 5,
+          name: 'C#',
+          coin: 0,
+      },
+      {
+          id: 6,
+          name: 'NodeJS',
+          coin: 500,
+      },
+  ];
+  //a. In ra các khoá học có coin > 0
+  For each
+  Array.prototype.forEach2=function(callback){
+      for(let i=0;i<this.length;++i)
+      {
+          callback(this[i])
+      }
+  }
+  courses.forEach2(function(course){
+      log(course)
+  }) 
+  
+  //b. Kiểm tra tất cả khóa học có thuộc tính coin > 0 không
+  Every
+  Array.prototype.every2=function(callback){
+    for(let i=0;i<this.length;++i){
+        if(!callback(this[i]))
+            return false;
+    }
+    return true
+  }
+  let isTrue=courses.every2(function(course){
+      return course.coin>0
+  })
+  log(isTrue)
+
+  //c.Kiểm tra có khóa học bất kỳ có thuộc tính coin > 0 không
+  Some
+  Array.prototype.some2=function(callback){
+    for(let i=0;i<this.length;++i){
+        if(callback(this[i]))
+            return true;
+    }
+    return false
+  }
+  let isTrue=courses.some2(function(course){
+      return course.coin>0
+  })
+  log(isTrue)
+
+  //d. Tìm 1 khóa học có coin > 0
+  Find
+  Array.prototype.find2=function(callback){
+    for(let course of this){
+        if(callback(course))
+            return course
+    }
+    return undefined
+  }
+  let findCourse=courses.find2(function(course){
+      return course.name==='JavaScript';
+  })
+  log(findCourse)
+
+  //e. Tìm tất cả khóa học có coin > 0
+  Array.prototype.filter2=function(callback){
+    let output=[]
+    for(let course of this){
+        if(callback(course))
+            output.push(course)
+    }
+    return output
+    }
+  let findCourses=courses.filter2(function(course){{
+      return course.name==='JavaScript';
+  }})
+  log(findCourses)
+
+  //f. Tìm tất cả khóa học có coin > 0 (Bằng Map)
+  Map
+  Array.prototype.map2=function(callback){
+    let output=[];
+    for(let value of this){
+        let check=callback(value)
+        if(check.coin>0)
+            output.push(value)
+    }
+    return output
+  }
+  let arrayCourses=courses.map2(function(course){
+    return course
+  })
+  log(arrayCourses)
+Câu 2: Chuyển đổi Object sang Array
+  let json='{"name":"Huy Pham","age":"20"}'
+  let object=JSON.parse(json);
+  let array=Object.keys(object).reduce(function(accu,key){
+      accu.push({'Key':key,'Giá trị':object[key]})
+      return accu
+  },[])
+  log(array)
+Câu 3: Bài tập thử post comment bằng Promise
+  let users=[
+      {
+          id:1,
+          name:'Huy Phạm',
+
+      },
+      {
+          id:2,
+          name:'Ngoc Hai',
+
+      },
+      {
+          id:3,
+          name:'Huynh Vu',
+
+      },
+  ];
+  let comments=[
+      {
+          id:1,
+          user_id:1,
+          content:'Sao lâu ra video vậy'
+      },
+      {
+          id:2,
+          user_id:2,
+          content:'Anh mới ra đấy em'
+      },
+
+  ]
+  //1. Lấy comments
+  //2. Từ comments lấy ra user_id
+  //3. Từ user_id lấy ra user tương ứng
+
+  //Fake API
+  function getComment(){
+      return new Promise((resolve,reject)=>{
+          setTimeout(() => {
+              resolve(comments)
+          }, 1000)
+      })
+  }
+
+  function getUser(arrrayUserId){
+      return new Promise((resolve,reject)=>{
+          setTimeout(() => {
+              let arrrayUser=users.filter(function(user){
+                  return arrrayUserId.includes(user.id)
+              })
+              resolve(arrrayUser)
+          }, 2000)
+      })
+  } 
