@@ -1,14 +1,14 @@
 {
-    "course":[
-        {
-            "id":1,
-            "name":"Kiến thức cơ bản cho người mới bắt đầu",
-            "description": "Học kiến thức cơ bản về lập trình web"
-        },
-        {
-            "id":2,
-            "name":"Kiến thức C++",
-            "description": "Học kiến thức cơ bản về  C++"
-        }
-    ]
+  "course": [
+    {
+      "id": 1,
+      "name": "Kiến thức cơ bản cho người mới bắt đầu",
+      "description": "Học kiến thức cơ bản về lập trình web"
+    },
+    {
+      "name": "Rest API là gì 2",
+      "description": "Mọi điều về Rest API mà người dùng không nên bỏ qua 2",
+      "id": 2
+    }
+  ]
 }
