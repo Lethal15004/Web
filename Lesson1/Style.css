@@ -1,6 +1,11 @@
-button {
-    background-color: #f05123;
-    padding: 9px 16px;
-    border-radius: 999px;
-    border: none;
+
+div{
+    margin: 10px 0 10px 0;
+}
+input{
+    width: 200px;
+}
+
+.hidden{
+    display: none;
 }

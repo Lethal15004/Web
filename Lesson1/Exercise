@@ -1,0 +1,313 @@
+Exercise (Quan trọng):
+Câu 1: Xử lý các hàm forEach, find, filter, every, some, map, reduce
+  var courses = [
+      {
+          id: 1,
+          name: 'JavaScript',
+          coin: 200,
+      },
+      {
+          id: 2,
+          name: 'Ruby',
+          coin: 0,
+      },
+      {
+          id: 3,
+          name: 'PHP',
+          coin: 300,
+      },
+      {
+          id: 4,
+          name: 'C++',
+          coin: 400,
+      },
+      {
+          id: 5,
+          name: 'C#',
+          coin: 0,
+      },
+      {
+          id: 6,
+          name: 'NodeJS',
+          coin: 500,
+      },
+  ];
+  //a. In ra các khoá học có coin > 0
+  For each
+  Array.prototype.forEach2=function(callback){
+      for(let i=0;i<this.length;++i)
+      {
+          callback(this[i])
+      }
+  }
+  courses.forEach2(function(course){
+      log(course)
+  }) 
+  
+  //b. Kiểm tra tất cả khóa học có thuộc tính coin > 0 không
+  Every
+  Array.prototype.every2=function(callback){
+    for(let i=0;i<this.length;++i){
+        if(!callback(this[i]))
+            return false;
+    }
+    return true
+  }
+  let isTrue=courses.every2(function(course){
+      return course.coin>0
+  })
+  log(isTrue)
+
+  //c.Kiểm tra có khóa học bất kỳ có thuộc tính coin > 0 không
+  Some
+  Array.prototype.some2=function(callback){
+    for(let i=0;i<this.length;++i){
+        if(callback(this[i]))
+            return true;
+    }
+    return false
+  }
+  let isTrue=courses.some2(function(course){
+      return course.coin>0
+  })
+  log(isTrue)
+
+  //d. Tìm 1 khóa học có coin > 0
+  Find
+  Array.prototype.find2=function(callback){
+    for(let course of this){
+        if(callback(course))
+            return course
+    }
+    return undefined
+  }
+  let findCourse=courses.find2(function(course){
+      return course.name==='JavaScript';
+  })
+  log(findCourse)
+
+  //e. Tìm tất cả khóa học có coin > 0
+  Array.prototype.filter2=function(callback){
+    let output=[]
+    for(let course of this){
+        if(callback(course))
+            output.push(course)
+    }
+    return output
+    }
+  let findCourses=courses.filter2(function(course){{
+      return course.name==='JavaScript';
+  }})
+  log(findCourses)
+
+  //f. Tìm tất cả khóa học có coin > 0 (Bằng Map)
+  Map
+  Array.prototype.map2=function(callback){
+    let output=[];
+    for(let value of this){
+        let check=callback(value)
+        if(check.coin>0)
+            output.push(value)
+    }
+    return output
+  }
+  let arrayCourses=courses.map2(function(course){
+    return course
+  })
+  log(arrayCourses)
+Câu 2: Chuyển đổi Object sang Array
+  let json='{"name":"Huy Pham","age":"20"}'
+  let object=JSON.parse(json);
+  let array=Object.keys(object).reduce(function(accu,key){
+      accu.push({'Key':key,'Giá trị':object[key]})
+      return accu
+  },[])
+  log(array)
+Câu 3: Bài tập thử post comment bằng Promise
+  let users=[
+      {
+          id:1,
+          name:'Huy Phạm',
+
+      },
+      {
+          id:2,
+          name:'Ngoc Hai',
+
+      },
+      {
+          id:3,
+          name:'Huynh Vu',
+
+      },
+  ];
+  let comments=[
+      {
+          id:1,
+          user_id:1,
+          content:'Sao lâu ra video vậy'
+      },
+      {
+          id:2,
+          user_id:2,
+          content:'Anh mới ra đấy em'
+      },
+
+  ]
+  //1. Lấy comments
+  //2. Từ comments lấy ra user_id
+  //3. Từ user_id lấy ra user tương ứng
+
+  //Fake API
+  function getComment(){
+      return new Promise((resolve,reject)=>{
+          setTimeout(() => {
+              resolve(comments)
+          }, 1000)
+      })
+  }
+
+  function getUser(arrrayUserId){
+      return new Promise((resolve,reject)=>{
+          setTimeout(() => {
+              let arrrayUser=users.filter(function(user){
+                  return arrrayUserId.includes(user.id)
+              })
+              resolve(arrrayUser)
+          }, 2000)
+      })
+  } 
+Bài 4: Bài tập liên quan về GET,POST,DELETE,PUT 
+    const coursesAPI = 'http://localhost:3000/course';
+    let buttonCreate=document.querySelector("div:nth-child(2) div:nth-child(3) button:nth-child(1)")
+    let buttonSave=document.querySelector("div:nth-child(2) div:nth-child(3) button:nth-child(2)")
+    let listCoursesBlock=document.getElementById('list-courses')
+
+    // Start to render course
+    function start(){
+        getCourses(function(listCourses){
+            renderCourses(listCourses)
+        })
+        handleFormCreate();
+    }
+    start()
+
+    function getCourses(callback){
+        fetch(coursesAPI)
+            .then(function(response){
+                return response.json()
+            })
+            .then(callback)
+    }
+    function renderCourses(listCourses){
+        let html=listCourses.map(function(course){
+            return `<li class="item-course-${course.id}">
+                <h3>${course.name}</h3>
+                <p>${course.description}</p>
+                <button onclick="handleDeleteCourse(${course.id})">Delete</button>
+                <button onclick="handleChangeCourse(${course.id})">Change</button>
+            </li>`
+        })
+        listCoursesBlock.innerHTML=html.join('')
+    }
+
+
+    //Create Course
+    function createCourse(data,callback){
+        let options={
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body:JSON.stringify(data)
+        }
+        fetch(coursesAPI,options)
+            .then(function(response){
+                return response.json();
+            })
+            .then(callback)
+    }
+    function handleFormCreate(){
+        buttonCreate.addEventListener("click",function(e){
+            let name=document.querySelector("input[name='name']").value;
+            let description=document.querySelector("input[name='description']").value;
+            let formData={
+                name:name,
+                description:description
+            }
+            document.querySelector("input[name='name']").value='';
+            document.querySelector("input[name='description']").value='';
+            createCourse(formData,function(course){
+                let html=`<li class="item-course-${course.id}">
+                            <h3>${course.name}</h3>
+                            <p>${course.description}</p>
+                            <button onclick="handleDeleteCourse(${course.id})">Delete</button>
+                            <button onclick="handleChangeCourse(${course.id})">Change</button>
+                        </li>`
+                listCoursesBlock.innerHTML+=html
+            })
+        })
+    }
+
+
+    //Delete Course
+    function handleDeleteCourse(id){
+        let options={
+            method:'DELETE',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }
+        fetch(coursesAPI+'/'+id, options)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(){
+                let elementRemove=document.querySelector(`.item-course-${id}`)
+                elementRemove.remove();
+            })
+    }
+
+    //Change Course
+    function handleChangeCourse(id){
+        getNewContent(id,handle);
+
+        function handle(formData){
+            let options={
+                method: 'PUT',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                body:JSON.stringify(formData)
+            }
+            fetch(coursesAPI+'/'+id,options)
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(data){
+                    log(data);
+                    document.querySelector(`.item-course-${id} h3`).innerText=data.name;
+                    document.querySelector(`.item-course-${id} p`).innerText=data.description;
+                })
+        }
+
+    }
+    function getNewContent(id,callback){
+        document.querySelector("input[name='name']").value=document.querySelector(`.item-course-${id} h3`).innerText;
+        document.querySelector("input[name='description']").value=document.querySelector(`.item-course-${id} p`).innerText; 
+        buttonCreate.classList.toggle('hidden');
+        buttonSave.classList.toggle('hidden');
+        buttonSave.addEventListener('click', function(e){
+            let name=document.querySelector("input[name='name']").value;
+            let description=document.querySelector("input[name='description']").value;
+            document.querySelector("input[name='name']").value='';
+            document.querySelector("input[name='description']").value='';
+            buttonCreate.classList.toggle('hidden');
+            buttonSave.classList.toggle('hidden');
+            let formData={
+                name:name,
+                description:description
+            }
+            callback(formData)
+        })
+    }
