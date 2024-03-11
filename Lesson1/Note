@@ -144,10 +144,24 @@ Part 3: Hàm
       + Declaration function: là hàm tạo ra ngay 1 function và phải có tên
         -> Example: function declarationFunction() {}
       + Expression function: là hàm được tạo ra dựa vào việc gán vào 1 biến và có thể có tên hoặc không
-        -> Example: let expressionFunction= function() {}
+        -> Example: let expressionFunction= function(data) {}
+                    expressionFunction(data);
       * Chú ý: Declaration function hơn Expression function là bạn có thể gọi Declaration function trước khi tạo nó gọi là Hoisting 
                còn Expression function thì không
-      + Arrow function
+      + Arrow function: là hàm được tạo dựa trên Expression function, mũi tên. Ta không cần chữ function và tên cho Arrow function
+        Cấu trúc: const sum = (param) => (value duoc return)
+        ->  Example: const sum= (a,b)=> {
+              return a+b;
+            }
+            log(sum(2,2));
+          hoặc nhanh hơn:
+        ->  const sum= (a,b)=> a+b;
+            log(sum(2,2));
+          - Nếu đằng sau dấu => mà không có {} JavaScript sẽ tự hiểu là giá trị trả về còn nếu có {} thì đó là khối code
+          - Nhưng nếu muốn trả về 1 Object thì ta cần giải quyết như sau:
+            -> const sum= (a,b)=> ({a:a,b:b});
+        * Chú ý: - Chính vì arrow function không định nghĩa giá trị this của riêng nó nên ta không sử dụng this đối với Arrow Function
+                 - Arrow Function không thể làm Constructor Function
   3. Tính chất
     - Không thực thi khi định nghĩa
     - Sẽ thực thi khi được gọi
@@ -186,7 +200,7 @@ Part 4: Chuỗi
         -> Example: let fullName= new String('Huy Pham')
       => Nên dùng cách 1
   2. Template String
-    - Template String (``) là 1 phương pháp tạo chuỗi linh hoạt hơn 
+    - Template String (``) là 1 phương pháp tạo chuỗi linh hoạt hơn bằng cách đưa biến vào
       -> Example: `${arguments[i]} -`
                   hoặc
                   let name ='Huy';
@@ -293,8 +307,8 @@ Part 6: Mảng
       - array.pop()                       -> Xóa phần tử cuối trong Mảng                      -> Trả về phần tử cuối đã Xóa
         -> Nếu mảng rỗng mà vẫn pop() thì sẽ trả về undefined   
       - array.push()                      -> Thêm 1 hoặc nhiều phần tử cuối cho Mảng          -> Trả về độ dài mới của mảng
-      - array.shift()                     -> Xóa 1 phần tử ở đầu Mảng
-        -> Nếu mảng rỗng mà vẫn shift() thì trả về undefined                                  -> Trả về phần đầu đã Xóa
+      - array.shift()                     -> Xóa 1 phần tử ở đầu Mảng                         -> Trả về phần đầu đã Xóa
+        -> Nếu mảng rỗng mà vẫn shift() thì trả về undefined                                  
       - array.unshift()                   -> Thêm 1 hoặc nhiều phần tử cho đầu mảng           -> Trả về độ dài mới của mảng
       - array.splice()                    -> Có thể xóa hoặc chèn phần tử cho Mảng
         -> array.splice(index,number) với index là vị trí bắt đầu xóa trở đi và number là số phần tử muốn xóa
@@ -1002,7 +1016,214 @@ Part 12: JSON, Fetch, Postman
           -> Ví dụ như GET, POST, PUT, DELETE
           -> Nếu không sử dụng mà chỉ sử dụng thông qua trình duyệt ta chỉ có sử dụng GET 
              mà không thể dùng các phương thức khác 
-
 -----------------------------------------------------------------------------------------------------------------------------------------------
 Part 13: ECMAScript 6
   - Là một quy chuẩn hay tiêu chuẩn trong JavaScript
+  I. Let & Const
+    - Dùng để thay thể var trong JavaScript
+    - So sánh Var / Let, Const : Scope, Hoisting
+      + Scope:  Đối với Var thì khi tạo biến toàn cục hay biến cục bộ đều có thể gọi trong các khối
+                Đối với Let và Const thì tạo biến cục thì có thể gọi trong các khối nhưng biến cục bộ thì không
+      + Hoisting: Được hỗ trợ cho biến Var còn Let, Const thì không được hỗ trợ
+    - So sánh Const / Var, Let :
+      + Assignment: Đối với Var, Let thì sau khi khai báo có thể gán nhiều lần
+                    Đối với Const thì sau khi khai báo thì chỉ gán 1 giá trị, không thể gán nhiều lần
+    - Nếu ta code thuần mà không sử dụng thư viện nào thì dùng var
+    - Nếu ta dùng Babel thì ta nên sử dụng Let và Const
+  II. Classes
+    - Là cách viết khác của Constructor Function
+    - Example:  class Course{
+                    constructor(name,cost){
+                        this.name=name;
+                        this.cost=cost;
+                    }
+                    getName(){
+                      return this.name;
+                    }
+                }
+                const jsCourse=new Course('Java',100);
+                log(jsCourse)
+                log(jsCourse.getName())
+    - Mục đích thì như Constructor Function nhưng việc sử dụng Classes sẽ dễ dàng nhận biết hơn đó là Constructor
+  III. Default parameter values
+    - Khi tham số ở 1 function không được truyền vào thì nó sẽ có giá trị mặc định
+    Example: Đây là chưa truyền tham Số
+     -> function handlerMessage(mess){
+          log(mess);
+        }
+        handlerMessage()
+      Để tạo giá trị mặc định cho tham số ta xử lý như sau: 
+      ->  function handlerMessage(mess='Default'){
+            log(mess);
+          }
+          handlerMessage()
+    - Sử dụng khi hàm có tham số mà không bắt buộc phải nhập thì dùng Default parameter values
+  IV. Enhanced object literals
+    - Dùng để dịnh nghĩa key: value cho object nhanh hơn (khi key và value có cùng tên)
+      -> Example: let name='Javascript'
+                  let price=1000;
+                  let course={
+                      name,
+                      price
+                  }
+                  log(course)
+    - Định nghĩa method cho object gọn hơn
+      -> Example: let course={
+                      name,
+                      price,
+                      getName(){
+                          return this.name;
+                      }
+                  }
+    - Định nghĩa key cho object dưới dạng biến
+      -> Example: let fieldName='name'
+                  let fieldPrice='price'
+                  let course={
+                      [fieldName]:'Javascript',
+                      [fieldPrice]:1000
+                  }
+                  log(course)
+  V.Destructuring, Rest parameters
+    1. Destructuring
+      - Làm phân rã mảng, object giúp lấy các phần tử hoặc các key nhanh hơn
+      Example:  Lấy các phần tử theo cách thông thường
+                let array=['JavaScript','PHP','Ruby']
+                let a=array[0]
+                let b=array[1]
+                let c=array[2]
+                log(a, b, c)
+      - Lấy phân tử theo Destructuring
+      Example:  let array=['JavaScript','PHP','Ruby']  hoặc let object={name: 'JavaScript',price:1000}
+                let [a,b,c]=array                           let {name,price}=object
+                log(a, b, c)                                log (name,price)
+    2. Rest parameters
+      - Sử dụng để lấy số phần tử còn lại khi kết hợp với Destructuring hoặc tham số của Function
+      Example:  let array=['JavaScript','PHP','Ruby']   
+                let [a,...rest]=array;
+                log(a,rest)
+        hoặc    let object={
+                  name:'JavaScript',
+                  price:1000,
+                  description:'Giảm giá',
+                  navigator:false,
+                }
+                let {name,...rest}=object;
+                log(name,rest)
+        hoặc    function logger(a,...paramters){
+                  log(a,paramters)
+                }
+                logger(1,2,3,4,5,6)
+      Destructuring + rest đối với Object:
+      let object={
+        name:'<NAME>',
+        email:'<EMAIL>',
+        addrees:'<ADDREE>',
+        age:20,
+        children:{
+            name:'Huy Pham',
+            age:20
+        },
+        color:'red'
+      }
+      let {name,children:{name:childrenName,age:childrenAge},color='black',...rest} = object
+      log(name,rest,childrenAge,childrenName,color)
+      * Chú ý trong Destructuring:  Áp dụng cho function là khi nếu mảng hoặc object đóng [], {}
+                                ->  thì tham số cũng phải có [] {}. Còn nếu không có thì tham số cũng không
+  VI. Spread
+    - Gọi là toán tử giải(loại bỏ [] hoặc {})
+    - Có cách viết tương tự rest parameters nhưng có mục đích thì khác
+    - Mục đích sử dụng:
+      + Nối 2 mảng lại với nhau :
+      -> Example: let array=['JavaScript','Ruby','PHP'];
+                  let array1=['NodeJS','Dart'];
+                  let array3=[...array,...array1];
+                  log(array3)
+      + Hợp nhât 2 Object lại với nhau
+      -> Example: let defaultConfig={
+                      api:'https://khoa-hoc',
+                      version:'V1',
+                      other:'other khoa hoc'
+                  }
+                  let exerciseConfig={
+                      ...defaultConfig,
+                      api:'https://bai-tap'
+                  }
+                  log(exerciseConfig)
+        ->  Bởi vì trùng key api nên api exerciseConfig sẽ ghi đè api defaultConfig
+    VII. Tagged Template literals
+      - Là một cách sử dụng nâng cao của Template String
+      - Ta có thể đưa Template String lên 1 function mà không có ()
+      - Nó đưa ra 1 mảng gồm các chuỗi mà không chứa các biến nội suy
+      - Khá phức tạp
+      ->  Example: function highlight(...rest){
+              log(rest)
+              //Output: 0 : (3) ['Học lập trình ', ' tại ', '!']
+                        1 : "Javascript"
+                        2 : "F8"
+          }
+          var brand ='F8';
+          var course='Javascript';
+          let html=highlight`Học lập trình ${course} tại ${brand}!`
+
+      -> Ví dụ cách sử dụng: 
+      function highlight([first,...strings],...values){\
+          log(first)              //Hoc lap trinh
+          log(strings)            //[tai,!]
+          log(values)             //[Javascript,F8]
+          return values.reduce((acc, val,index) =>[...acc,`<span class="hightlight-${index}">${val}</span>`,strings.shift()],[first])
+      }
+      var brand ='F8';
+      var course='Javascript';
+      let html=highlight`Học lập trình ${course} tại ${brand}!` //Sử dụng Template String cho hàm
+      document.querySelector('.test').innerHTML=html.join('');
+      let colors=['#ff97a0','#bea5ff','#00d061'].forEach((color,index) => {
+          document.querySelector(`.hightlight-${index}`).style.color=color;
+      })
+    VIII. Modules
+      - export default logger => export default, mỗi file js chỉ export default duy nhất 1 cái. export type => export thường, có thể export nhiều cái trong file
+      - Để import default: import [tên_đối_tượng_cần_import] from [địa_chỉ_file_js]
+      - Để import các export thường: Ta sử dụng destructuring: `import { [tên_đối_tượng_cần_import] } from [địa_chỉ_file_js].
+      - Đối với import dạng thường, ta có thể import nhiều đối tượng. `import {typelog, typewarn, typeerror} from './constants.js
+      1. Module
+        - Một module có thể hiểu là một file, trong đó sẽ chứa những đoạn code đảm nhiệm một chức năng / nghiệp vụ cụ thể nào đó.
+      2. Tại sao lại sử dụng Module
+        - Để code dễ đọc hơn, và dễ bảo trì, thay đổi hơn, chúng ta cần chia chúng thành các thành phần nhỏ hơn.
+      3. Làm sao để sử dụng module
+        - Để sử dụng module, ta cần set attribute type = module cho thẻ script
+          <script type="module" src="./main.js"></script>
+      4. Export
+        - Để xuất ra cho module khác để sử dụng.
+        - Lưu ý: Một module chỉ có duy nhất 1 export default
+        //  Example File demo.js
+            const TYPE_LOG = 'log'
+            const TYPE_WARN = 'warn'
+            const TYPE_ERROR = 'error'
+            const logger = 'logger'
+            export { TYPE_LOG, TYPE_WARN, TYPE_ERROR }
+            export default logger
+      5.Import
+        - Để nạp module ta sử dụng từ khoá import.
+        - Để nạp export default của một module ta import bình thường.
+          //  Example: Import từ export default của file logger.js
+              import logger from './logger.js'
+        - Để nạp các export thường (không phải export default) ta sử dụng thuật toán destructuring.
+          //  Example: Import các export của file type_logger.js
+              import { TYPE_LOG, TYPE_WARN, TYPE_ERROR } from './demo.js'
+        - Để nạp tất cả các export ta sử dụng import * as [Tên_Muốn_Thay_Thế] from ' ... '. Trả về 1 object dạng module chứa các export.
+              import * as typeLog from './demo.js'
+              console.log( typeLog.TYPE_LOG ) // log
+              console.log( typeLog.TYPE_WARN ) // error
+              console.log( typeLog.defau< ) // logger
+        - Import module thông qua file trung gian
+              // File index.js
+              // Viết chi tiết
+              import logger from './logger.js'
+              export defau< logger
+              // ===== ===== //
+              
+              // Viết rút gọn
+              export { defau< } from './logger.js'
+              // Import
+              import logger from './index.js'
+
+
