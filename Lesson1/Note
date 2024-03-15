@@ -728,7 +728,9 @@ Part 11: HTML DOM, DOM CSS, DOM Event, EventListener (DOM = Document Object Mode
         + contains('String')                 ->  Kiểm tra trong 1 element có tên class đó không 
         + remove('String')                   ->  Xóa 1 class trong element
         + replace('oldString','newString')   ->  Thay thế 1 class thành 1 class mới 
-        + toggle('String')                   ->  Sử dụng theo cơ chế nếu element có tên class đó thì nó sẽ remove, còn chưa có thì sẽ add vào
+        + toggle('String',force(boolean))    ->  Sử dụng theo cơ chế nếu element có tên class đó thì nó sẽ remove, còn chưa có thì sẽ add vào (Nếu có 1 đối số là String)
+                                                 Còn nếu có 2 đối số là String và force(boolean) thì nó thêm class nếu true, và gỡ bỏ nếu false 
+                                                
   III. DOM Event
     1. Attribute Event
       - Thêm trực tiếp inline của thẻ
@@ -1183,7 +1185,7 @@ Part 13: ECMAScript 6
       - export default logger => export default, mỗi file js chỉ export default duy nhất 1 cái. export type => export thường, có thể export nhiều cái trong file
       - Để import default: import [tên_đối_tượng_cần_import] from [địa_chỉ_file_js]
       - Để import các export thường: Ta sử dụng destructuring: `import { [tên_đối_tượng_cần_import] } from [địa_chỉ_file_js].
-      - Đối với import dạng thường, ta có thể import nhiều đối tượng. `import {typelog, typewarn, typeerror} from './constants.js
+      - Đối với import dạng thường, ta có thể import nhiều đối tượng. `import {typelog, typewarn, typeerror} from ./constants.js
       1. Module
         - Một module có thể hiểu là một file, trong đó sẽ chứa những đoạn code đảm nhiệm một chức năng / nghiệp vụ cụ thể nào đó.
       2. Tại sao lại sử dụng Module
@@ -1226,4 +1228,65 @@ Part 13: ECMAScript 6
               // Import
               import logger from './index.js'
 
+  * Các kiến thức cần biết sau khi làm bài tập
+    - Animate 
+      let cdThumb=document.querySelector('.cd-thumb');
+      let cdThumbAnimate= cdThumb.animate(
+        [
+            {transform: 'rotate(360deg)'}
+        ],
+        {
+            duration: 10000,
+            iterations: Infinity
+        })
+      cdThumbAnimate.pause()
+      cdThumbAnimate.play()
+      -> Giải thích: Ta lấy 1 element thông qua DOM rồi chỉnh animate
+      -> Cấu trúc animate(keyframes, options) trong đó keyframes là 1 mảng object, còn options là 1 object gồm nhiều key và value 
+      -> Trả về 1 biến. Biến này ta có thể sử dụng để play() or pause().
+    - offsetWidth -> lấy chiều rộng
+    - offsetHeight -> lấy chiều dài
+    - onscroll    -> sự kiện khi kéo lăn chuột
+    - window.scrollY || document.documentElement.scrollTop -> lấy chiều dài của trang web khi kéo lăn chuột
+    - Audio
+      + Một số thuộc quan trọng đối với audio
+        -> audio.src: Là nguồn phát bài hát
+        -> audio.paused: Kiểm tra bài hát có dừng chưa
+        -> audio.play() và audio.pause(): Làm bài nhạc chạy hoặc dừng lại
+        -> audio.onplay: Là sự kiện chạy nhạc
+        -> audio.onpause: Là sự kiện nhạc dừng
+        -> audio.onended: Là sự kiện nhạc hết bài
+        -> audio.ontimeupdate: Là sự kiện khi thời gian nhạc thay đổi
+        -> audio.currenttime: Là thời gian hiện tại của bài hát
+        -> audio.duration: Là thời gian của cả bài hát
+    - element.scrollIntoView({object}): là hành động tự kéo website đến ellement đang chọn
+      -> Example:   document.querySelector(`.song-${app.song[app.currentIndex].id}`).scrollIntoView({
+                      behavior:'smooth',
+                      block:'center',
+                    });
+    - element.closest(selector): Là phương thức trả về thẻ cha gần nhất của thẻ đang chọn (selector phải là thẻ cha muốn)
+      -> Example:   let songElement=e.target.closest('.song-item')
+
+    -> Đây là phần chưa tìm hiểu bao giờ hoặc chưa có nhìn:
+      + const PLAYER_STORAGE_KEY='HYUTA_PLAYER';
+      + settings:JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY))||{},
+      + setSetting:function(key,value){
+          this.settings[key]=value;
+          localStorage.setItem(PLAYER_STORAGE_KEY,JSON.stringify(this.settings));
+        }, 
+
+      + if(btn_Repeat.classList.contains('active')){
+            app.isRepeat=true;
+          }
+        else{
+              app.isRepeat=false;
+            }
+      + app.setSetting('isRepeat',app.isRepeat) -> 'isRepeat' là 1 key và app.isRepeat là value mà value này từ object app.isRepeat
+      + app.setSetting('song',random)
+      + loadSetting(){
+          btn_Random.classList.toggle('active', this.settings.isRandom);
+          btn_Repeat.classList.toggle('active',this.settings.isRepeat);
+        },
+        
+    
 
