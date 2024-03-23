@@ -168,6 +168,14 @@ Part 3: Hàm
     - Có thể nhận tham số
     - Có thể trả về 1 giá trị
     - Khi sử dụng this trong 1 function thì this đang trỏ đến tên của function đó
+    - Ta có thể thêm nhiều thuộc tính cho 1 function 
+      Example:  function showMessage( message ){
+                  showMessage.color='red';
+                }
+                showMessage.text=()=>{
+                  log('Hi')
+                }
+      -> Ở đây ta có function showMessage sau ta thêm 1 thuộc tính text bằng 1 hàm expressionFunction
   4. Tham số ( parameter ), Đối số ( argument )
   - Example: function showMessage( message ){}
            showMessage( 'Hi xin chào các bạn')
@@ -480,6 +488,7 @@ Part 7: object
   3. Object Constructor (Khung xây dựng)
     - Khi tạo Object Constructor thì nên viết hoa chữ cái đầu
     - Khá giống Java nhưng tạo Object Constructor thông qua Function 
+    - Khi gán 1 biến cho 1 Object Constructor thì biến đó là 1 kiểu dữ liệu object
       Example:
       function User(firstName,lastName,avatar){
         this.firstName=firstName;
@@ -489,13 +498,25 @@ Part 7: object
           return `${this.firstName} ${this.lastName}`
         }
       }
-      let author=new User('Huy','Phạm','Avatar');
-      let user=new User('Hải','Lê','Avatar');
+      let author=new User('Huy','Phạm','Avatar'); -> Kiểu dữ liệu Object
+      let user=new User('Hải','Lê','Avatar'); -> Kiểu dữ liệu Object
       -> Đây là cách để tạo Object Constructor
     - Ta cung có thể in ra constructor của 2 đối tượng trên
       -> console.log(author.constructor)
     - Ta cũng có thể kiểm tra constructor của 1 đối tượng có giống với constructor mà ta thấy hay không
-      -> console.log(author.constructor === User)      
+      -> console.log(author.constructor === User) 
+    * Chú ý : Khi ta tạo 1 object constructor ta có thể sử dụng từ this để lấy được biến thông qua new
+      -> Example:
+        function User(firstName,lastName,avatar){
+          this.firstName=firstName;
+          this.lastName=lastName;
+          this.avatar=avatar
+          this.getName(firstName+lastName)
+        }
+        let author=new User('Huy','Phạm','Avatar');
+        author.getName=function(name){
+          log(name)
+        }
   4. Object Prototype (Các tính chất)
     - Nếu ta muốn thêm thuộc tính chung cho Constructor thì dùng Object Prototype
     - Còn nếu muốn thêm thuộc tính riêng ta sử dụng tênObject.tênThuộcTính
@@ -647,6 +668,8 @@ Part 11: HTML DOM, DOM CSS, DOM Event, EventListener (DOM = Document Object Mode
         + Ngoài ra ta cũng có 1 cách để lấy được 
           -> Example: let boxNode= document.querySelector('.box-1')
                       log(boxNode.querySelectorAll('li'))
+                - Ta cũng có thể lấy nhiều element thông qua attribute
+                  Example: let boxNode= document.querySelector('[atrributeName]')
       - Thêm 1 element trong 1 element có sẵn:
         - Để thêm 1 element trong 1 element có sẵn thì ta cần phải tạo 1 element mới và sau đó thêm vào element có sẵn
         + innerHTML (Thuộc tính của element)              -> element.innerHTML='<h1>Heading</h1>'     -> Tạo 1 element mới trong element có sẵn 
@@ -725,7 +748,8 @@ Part 11: HTML DOM, DOM CSS, DOM Event, EventListener (DOM = Document Object Mode
         + add('String')         -> Thêm 1 class vào element  -> boxElement.classList.add('box-2')
           - Nếu trong element có 1 class trùng với class được thêm thì nó coi là 1 và độ dài DOMTokenList không tăng
           - Thêm nhiều class add('String','String',....)
-        + contains('String')                 ->  Kiểm tra trong 1 element có tên class đó không 
+        + contains('String')                 ->  Kiểm tra trong 1 element có tên class đó không (Áp dụng cho các thẻ có class)
+        + matches('String')                  ->  Kiểm tra trong 1 element có tên class đó không (Áp dụng cho các thẻ không có class)
         + remove('String')                   ->  Xóa 1 class trong element
         + replace('oldString','newString')   ->  Thay thế 1 class thành 1 class mới 
         + toggle('String',force(boolean))    ->  Sử dụng theo cơ chế nếu element có tên class đó thì nó sẽ remove, còn chưa có thì sẽ add vào (Nếu có 1 đối số là String)
@@ -1229,6 +1253,19 @@ Part 13: ECMAScript 6
               import logger from './index.js'
 
   * Các kiến thức cần biết sau khi làm bài tập
+    
+    - innerHTML:
+      + Sử dụng khi bạn muốn ghi đè hoặc thay đổi toàn bộ nội dung của một phần tử DOM.
+      + Thuận lợi khi bạn có một chuỗi HTML hoặc một biến chứa HTML mà bạn muốn thêm vào phần tử.
+      + Dễ dàng để thêm hoặc xóa một số lượng lớn các phần tử DOM cùng một lúc.
+      + Tuy nhiên, khi sử dụng innerHTML, toàn bộ nội dung của phần tử DOM sẽ được ghi đè, nên cẩn thận để tránh mất dữ liệu hoặc xung đột với các sự kiện hoặc thuộc tính đã được gắn vào các phần tử con.
+    
+    -appendChild: 
+      + Sử dụng khi bạn muốn thêm một phần tử DOM con vào phần tử cha mà không ghi đè nội dung hiện tại của phần tử cha.
+      + Thích hợp khi bạn muốn thêm một phần tử DOM con cụ thể vào một vị trí cụ thể trong phần tử cha, chẳng hạn như cuối cùng hoặc giữa danh sách các phần tử con.
+      + Thường được sử dụng khi bạn cần thêm một phần tử DOM con mới được tạo ra bằng JavaScript hoặc một phần tử DOM tồn tại khác.
+      + appendChild không làm mất nội dung hiện tại của phần tử cha, chỉ thêm phần tử con mới vào cuối danh sách các phần tử con
+    
     - Animate 
       let cdThumb=document.querySelector('.cd-thumb');
       let cdThumbAnimate= cdThumb.animate(
@@ -1244,12 +1281,14 @@ Part 13: ECMAScript 6
       -> Giải thích: Ta lấy 1 element thông qua DOM rồi chỉnh animate
       -> Cấu trúc animate(keyframes, options) trong đó keyframes là 1 mảng object, còn options là 1 object gồm nhiều key và value 
       -> Trả về 1 biến. Biến này ta có thể sử dụng để play() or pause().
+      
     - offsetWidth -> lấy chiều rộng
     - offsetHeight -> lấy chiều dài
     - onscroll    -> sự kiện khi kéo lăn chuột
     - window.scrollY || document.documentElement.scrollTop -> lấy chiều dài của trang web khi kéo lăn chuột
-    - Audio
-      + Một số thuộc quan trọng đối với audio
+    
+    - Audio:
+      + Một số thuộc tính quan trọng đối với audio
         -> audio.src: Là nguồn phát bài hát
         -> audio.paused: Kiểm tra bài hát có dừng chưa
         -> audio.play() và audio.pause(): Làm bài nhạc chạy hoặc dừng lại
@@ -1259,14 +1298,67 @@ Part 13: ECMAScript 6
         -> audio.ontimeupdate: Là sự kiện khi thời gian nhạc thay đổi
         -> audio.currenttime: Là thời gian hiện tại của bài hát
         -> audio.duration: Là thời gian của cả bài hát
+
+    - input:
+      + Một số thuộc tính quan trọng đối với input
+        -> input.value: Là giá trị của input
+        -> input.blur: Là sự kiện khi không focus vào input hay là thoát ra ngoài
+        -> input.oninput: Là sự kiện khi giá trị của input thay đổi
+
+    - form
+      + Một số thuộc tính quan trọng đối với form
+        -> form.onsubmit: Là sự kiện khi submit form
+
     - element.scrollIntoView({object}): là hành động tự kéo website đến ellement đang chọn
       -> Example:   document.querySelector(`.song-${app.song[app.currentIndex].id}`).scrollIntoView({
                       behavior:'smooth',
                       block:'center',
                     });
-    - element.closest(selector): Là phương thức trả về thẻ cha gần nhất của thẻ đang chọn (selector phải là thẻ cha muốn)
-      -> Example:   let songElement=e.target.closest('.song-item')
 
+    - DOM (Lấy các phần tử từ HTML)
+      + document.querySelectorAll('[name][rules]') 
+        -> Lấy ra tất cả element có thuộc tính name và rules trong 1 element
+      + element.parentElement
+        -> Là phương thức trả về thẻ cha của thẻ đang chọn
+      + element.closest(selector): Là phương thức trả về thẻ cha gần nhất của thẻ đang chọn (selector phải là thẻ cha muốn)
+        -> Example:   let songElement=e.target.closest('.song-item')
+
+    - Sự khác nhau giữa contains, includes và matches
+        + contains: Phương thức contains thường được sử dụng để kiểm tra xem một chuỗi con có tồn tại 
+                    trong một chuỗi lớn hay không. Nó thường được sử dụng với chuỗi.
+
+          -> Example: const str = "Hello, world!";
+                      console.log(str.contains("world")); // true
+
+        + includes: Phương thức includes cũng được sử dụng để kiểm tra xem một phần tử có tồn tại 
+                    trong một mảng hay không. Nó trả về true nếu phần tử được tìm thấy và false nếu không.
+                    Ta có thể sử dụng includes để kiểm tra xem 1 kí tự có trong chuỗi hay không
+
+          -> Example: const arr = [1, 2, 3, 4, 5];
+                      console.log(arr.includes(3)); // true
+
+        + matches:  Phương thức matches được sử dụng để kiểm tra xem một phần tử có khớp với một selector CSS
+                    không. Nó trả về true nếu phần tử khớp với selector và false nếu không.
+          
+          -> Example:   if (myDiv.matches('.highlight')) {
+                            console.log('Div matches the ".highlight" selector.');
+                        } else {
+                            console.log('Div does not match the ".highlight" selector.');
+                        }
+          -> Example: const element = document.querySelector("div");
+                      console.log(element.matches(".container")); // true
+
+    - Kiến thức về từ this và tạo thông qua Object Constructor
+      + Bên index.html:
+          let form = new Validator('#register-form',".form-group",'.form-message','#password');
+          form.onSubmit = function(data){
+            console.log(data);
+          }
+          form.test=123
+      + Bên main.js:
+        this.onSubmit(data) => Sử dụng ArrowFunction là từ this luôn trỏ về Object Constructor
+
+    ---------------------------------------Chưa biết---------------------------------------------------
     -> Đây là phần chưa tìm hiểu bao giờ hoặc chưa có nhìn:
       + const PLAYER_STORAGE_KEY='HYUTA_PLAYER';
       + settings:JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY))||{},

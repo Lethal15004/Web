@@ -1,29 +1,5 @@
 {
-  "course": [
-    {
-      "name": "Kiến thức JavaScipt",
-      "description": "Học kiến thức cơ bản về JavaScipt",
-      "id": 2
-    },
-    {
-      "name": "Kiến thức HTML và CSS",
-      "description": "Học kiến thức cơ bản về HTML và CSS",
-      "id": 3
-    },
-    {
-      "name": "Kiến thức Python",
-      "description": "Học kiên thức cơ bản về Python",
-      "id": 4
-    },
-    {
-      "name": "Kiến thức C",
-      "description": "Học kiên thức cơ bản về C",
-      "id": 5
-    },
-    {
-      "name": "Kiến thức Python",
-      "description": "Học kiên thức cơ bản về Python",
-      "id": 6
-    }
+  "account": [
+    
   ]
 }
