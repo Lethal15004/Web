@@ -1,0 +1,115 @@
+Part 1: HTTP Protocol (Hypertext Transfer Protocol)
+    - Là cách thức truyền tải qua Internet
+    - Mỗi khi gửi URL trên mạng ta đều kêu 1 request qua máy chủ (server)
+    - Mỗi request gửi lên server đều phải có 1 response tương ứng
+    - Khi ta kiểm tra thì có 1 phần là remote address 
+        -> Đó chính là địa chỉ IP của máy chủ, sau dấu : thì đó port hay cổng
+    - Nội dung được response thường gồm 2 phần là header và body
+        -> Example: ->(header)
+                    HTTP/1.1 200 OK
+                    Date: Mon, ngày 23 tháng 5 năm 2005 22:38:34 GMT
+                    Content-Type: text/html; charset=UTF-8
+                    Content-Encoding: UTF-8
+                    Content-Length: 138
+                    Last-Modified: Wed, 08 Jan 2003 23:11:55 GMT
+                    Server: Apache/1.3.3.7 (Unix) (Red-Hat/Linux)
+                    ETag: "3f80f-1b6-3e1cb03b"
+                    Accept-Ranges: bytes
+                    Connection: close
+                    ->(body)
+                    <html>
+                    <head>
+                    <title>An Example Page</title>
+                    </head>
+                    <body>
+                    Hello World, this is a very simple HTML document.
+                    </body>
+                    </html>
+    - HTTP Status Code: (https://vi.wikipedia.org/wiki/Hypertext_Transfer_Protocol)-> Lên này để tìm
+        - HTTP Status Code: Mã trạng thái HTTP được máy chủ phản hồi lại mỗi khi nhận được HTTP Resquest.
+        + 1xx: Thông tin
+        + 2xx: Thành công
+        + 3xx: Sự điều hướng lại
+        + 4xx: Lỗi Client
+        + 5xx: Lỗi Server
+--------------------------------------------------------------------------------------------------------------------------
+Part 2: SSR(Server side render) & CSR(Client side render)
+    -   SSR(Server side render):  - Là một cách khi ta request về server thì server sẽ toàn quyền tải nội dung HTML
+                                  và các file js để browser hiểu và hiển thị.
+                                - Khi người dùng truy cập vào một trang web sử dụng SSR, server 
+                                  sẽ tạo các nội dung của trang (HTML, CSS, JS) và gửi chúng đến trình duyệt để hiển thị.
+        -> Ưu điểm của SSR:
+            + Giúp web hiển thị trên các platform tốt hơn
+            + Load web lần đầu nhanh hơn
+        -> Các nhược điểm của SSR:
+            +   Trang web phải xử lý lại hoàn toàn và load lại từ đầu nếu chỉ 
+                có một thay đổi nhỏ trong nội dung. (Ví dụ tiêu đề thay đổi …)
+            +   Việc xử lý nội dung HTML khiến hao tốn tài nguyên server, 
+                gây chậm trễ khi xử lý các request khác.
+            +   Lượng request lên server rất nhiều, do mọi tác vụ đều phải xử lý lại trên server 
+                và render lại HTML
+            +   TTFB (Time To First Byte) cao do cần phải xử lý trên server, sẽ ảnh hưởng tới một vài 
+                công cụ benchmark Và từ những nhược điểm đó, Client Side Render (CSR) được sinh ra.
+    -   CSR(Client side render):    là một kỹ thuật tạo ra các trang web động bằng cách render các nội dung của 
+                                    trang trực tiếp trên phía client (trình duyệt web) thay vì trên phía 
+                                    server. Với CSR, trình duyệt web sẽ tải một trang HTML trống và 
+                                    sau đó sử dụng các tài nguyên JavaScript để tải dữ liệu và 
+                                    render các nội dung trên trang. (Tiếp xúc với API)
+        ->  Nhược điểm của CSR nổi bật như :
+            +   Lượng dữ liệu lần đầu load về chậm hơn
+            +   Nội dung hiển thị ra lần đầu chậm hơn so với SSR, tuy nhiên những lần sau thì quá nhanh do việc xử lý ngay trên client.
+            +   SEO bị ảnh hưởng, do nội dung web được sinh trên client, 
+                khiến crawler của của Seach engine không tiếp xúc được nội dung. 
+                Gần đây mới có Google giải quyết được vấn đề này, 
+                tuy nhiên dù Google nắm phần lớn thị phần tìm kiếm thì tại những quốc gia khác nhau,
+                sẽ có ảnh hưởng nhất định.
+    * Cách nhận biết web sử dụng SSR hay CSR
+        ->  Kiểm tra page source nếu page source của trang đó chừ đầy đủ file HTML thì là SSR (nhiều)
+            Còn nếu source code trong page source ít và ngắn thì có lẽ là CSR
+        ->  Khi nhấn vào 1 link nếu trang web không load lại mà chỉ thay đổi nội dung thì đó là CSR
+            Còn load lại hết hay gửi 1 request mới là SSR
+    - Ta có thể kết hợp cả 2 SSR và CSR
+--------------------------------------------------------------------------------------------------------------------------
+Part 3: ExpressJS
+    - Là Framework cho NodeJS
+    - Được sử dụng để xây dựng ứng dụng web và API
+Part 4: Web server 
+    - Khác với JSON server bên JS cơ bản thì Web server yêu cầu NodeJS và ExpressJS
+    - Để bắt đầu ta thực hiện như sau:
+        + Tạo 1 file server.js
+        + Thực hiện lệnh npm init
+        + Điền các thông tin quan trọng nhất là entry point (file đầu vào)
+        + Thực hiện lệnh npm install express -> Cài ExpressJS
+    - Đưa đoạn code sau: 
+        const express = require('express') 
+            -> Yêu câu thư viện express sau khi cài ngay trên terminal
+        const app = express()
+            -> Sau khi tạo biến express thì nó cũng là 1 function để chạy rồi gán vào biến app đại diện cho ứng dụng NodeJS
+        const port = 3000   
+            -> Website của bản thân chạy ở cổng nào
+        app.get('/trang-chu', (req, res) => {
+            return res.send('Hello World!')
+        })
+            -> Đoạn '/' là 1 route, khi truy cập vào http://localhost:3000/trang-chu thì sẽ trả về Hello World
+        // 127.0.0.1 - localhost
+        app.listen(port, () => {
+            return console.log(`Example app listening at http://localhost:${port}`)
+        })
+            -> Đoạn này để chạy server ở cổng 3000 và in ra trong terminal
+--------------------------------------------------------------------------------------------------------------------------
+Part 5: Nodemon & Debug & Add Git
+    1. Nodemon
+        - Là 1 thư viện giúp tự động khởi động lại ứng dụng node khi file
+          js thay đổi 
+        - Giúp thay đổi file 1 cách nhanh chóng
+        - Cách Cài
+            + npm install nodemon --save-dev
+            + Vào file package.json thêm trong script 1 key value là:
+              "start":"nodemon --inspect tên_file.js",
+            + Khi ta khởi động server chỉ cần ghi npm start thay vì node tên_file.js
+    2. Debug
+        - Để debug thì ta vào inspect web có biểu tưởng NodeJS 
+        - Nhấn vào thì ta có 1 phần console và 1 phần source, tìm file
+        - Nếu muốn dừng phần nào thì nhấn vào phần đó
+* Chú ý: Part 4 và Part 5 là 2 Part quan trọng chuẩn bị 1 Project
+    3.Add Git
