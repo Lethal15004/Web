@@ -162,6 +162,7 @@ Part 3: Hàm
             -> const sum= (a,b)=> ({a:a,b:b});
         * Chú ý: - Chính vì arrow function không định nghĩa giá trị this của riêng nó nên ta không sử dụng this đối với Arrow Function
                  - Arrow Function không thể làm Constructor Function
+                 - Khi sử dụng this cần để ý nó là Arrow Function hay Fuction thông thường
   3. Tính chất
     - Không thực thi khi định nghĩa
     - Sẽ thực thi khi được gọi
@@ -197,6 +198,18 @@ Part 3: Hàm
   5. Return 
     - Hàm Built-in thì sẽ trả về nếu được gán vào 1 Biến
     - Nếu ta không trả về gì mà in ra thì mặc định là undefined
+  6. Phân biệt gọi hàm không có () và có ()
+    - Khi bạn gọi một hàm trong JavaScript, việc có sử dụng dấu ngoặc đơn () hay không đối với tên hàm phụ thuộc \
+      vào cách bạn muốn thực thi hàm đó.
+      - Khi không sử dụng dấu ngoặc đơn:
+        + Khi bạn gọi hàm mà không có dấu ngoặc đơn (), bạn thực sự đang truy cập đến chính hàm đó, không thực thi nó.
+        + Điều này thường được sử dụng khi bạn muốn truy cập vào đối tượng hoặc phương thức của đối tượng mà không muốn thực thi nó ngay lập tức.
+        -> Example: app.handleEvent; // Truy cập đến hàm handleEvent, không thực thi nó
+      - Khi sử dụng dấu ngoặc đơn:
+        + Khi bạn sử dụng dấu ngoặc đơn () sau tên hàm, bạn đang thực sự thực thi hàm đó.
+        + Điều này được sử dụng khi bạn muốn chạy hàm và lấy kết quả trả về từ hàm đó.
+        ->  Example: app.handleEvent(); // Thực thi hàm handleEvent và lấy kết quả trả về từ hàm đó
+
   * Chú ý: - Nếu đặt tên fucntion trùng thì khi gọi nó sẽ lấy cái function mới nhất vì function mới nhất sẽ ghi đè mấy function cũ
 -----------------------------------------------------------------------------------------------------------------------------------------------
 Part 4: Chuỗi

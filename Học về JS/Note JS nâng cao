@@ -1,0 +1,101 @@
+Part 1: IIFE (Immediately Invoked Function Expressions)
+    - Hay được gọi là Self-Invoking Function
+    - Là một Expression Function được gọi ngay lập tức sau khi được tạo ra
+    - Cấu trúc của IIFE:
+        + (function(parameter){
+            //code
+        })(arguments)
+    - Ví dụ:(function(message){
+                console.log(message)
+            })("Hello")
+    - Chú ý: Trước khi tạo 1 IIFE thì các câu lệnh trước cần dấu ;
+    - Tính chất:
+        + IIFE là 1 hàm private tức là khi tạo ra thì gọi ngay lập tức ta không truy cập IIFE từ bên ngoài
+            -> Example: (function Introduce(message){
+                            console.log(message)
+                        })("Hello")
+                        Introduce("Hello") -> lỗi
+        + Nhưng ta có thể gọi lại bên trong -> khá giống đệ quy
+            -> Example: (function Introduce(message,i){
+                            if(i==10)
+                                return;
+                            console.log(message)
+                            Introduce("Hello",++i)//-> Điểm gọi lại
+                        })("Hello",0)
+        + Ta cũng gán 1 biến cho 1 IIFE, khi IIFE trả về giá trị sẽ được gán cho biến
+            -> Example: let result=(function(message){
+                            return message
+                        })("Hello")
+                        console.log(result) -> "Hello"
+
+    - Sử dụng khi ta muốn tạo 1 hàm thực thi ngay mà các biến trong hàm không bị trùng lặp với các biến toàn cục
+    - Sử dụng khi ta cũng muốn bảo toàn tính toàn vẹn của dữ liệu nhờ private
+    - Sử dụng khi ta muốn tạo 1 hàm mà không muốn tạo ra 1 hàm mới
+        ->  Example: Ta có thể thay đổi 1 key trong 1 object 
+            let app={
+                cars:[],
+                add(car){
+                    this.cars.push(car);
+                },
+                edit(index,car){
+                    this.cars[index]=car;
+                },
+                delete(index){
+                    this.cars.splice(index,1);
+                }
+            }
+            app.add('BMW')
+            app.add('Toyota')
+            app.delete(0)
+            app.edit(0,'Ferrari')
+            app.cars=null ->Ta có thể thay đổi được biến cars
+        -> Cách sử dụng tối ưu hơn
+            let app=(function(){
+                let cars=[];
+                return {
+                    getCar(index){
+                        return cars[index];
+                    },
+                    add(car){
+                        cars.push(car);
+                    },
+                    edit(index,car){
+                        cars[index]=car;
+                    },
+                    delete(index){
+                        cars.splice(index,1);
+                    }
+                }
+            })() -> Kỹ thuật Module Pattern
+            Ta không thay đổi giá trị biến cars vì nó private
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Part 2: Scope (Phạm vi)
+    - Phạm vi là liên quan phạm vi truy cấp biến hoặc hàm
+    - Các loại phạm vi:
+        +   Global - Toàn cầu
+            -> Tạo các biến hoặc hàm không trong 1 hàm khác thì đó là global
+        +   Code block - Khối mã: let, const, function (áp dụng cho 3 thằng này)
+            -> Nếu ta khai báo let hoặc const trong khối mã {} thì các biến đó chỉ sử dụng trong khối mã hoặc là function con đó
+        +   Local scope - Hàm: var,function
+            -> Nếu ta khai báo var hoặc function trong 1 function khác 
+               thì biến var hoặc function đó chỉ có thể sử dụng trong function đó hoặc các function con
+    - Tính chất:
+        + Mỗi khi gọi hàm nó sẽ tạo ra 1 phạm vi mới (Mặc định ban đầu là Global)
+        + Khi gọi hàm con từ hàm cha thì hàm con có thể truy cập biến của hàm cha nhưng ngược lại không thể
+        + Nếu có nhiều biến cùng tên(khác phạm vi) thì ưu tiên biến gần nhất
+    - Khi nào 1 biến sẽ bị xóa khỏi bộ nhở ?
+        + Biến global: Khi tắt trình duyệt
+        + Biến trong code block & trong hàm: Khi thoát khỏi code block {} hoặc hàm kết thúc thì nó sẽ tự xóa đi
+        + Biến trong được tham chiếu bởi 1 hàm: Khi 1 biến bị tham chiếu đến 1 biến khác có trong hàm khác
+            -> Example: function makeCounter(){
+                            let count=0;
+                            function counter(){
+                                return ++count; ->Tham chiếu đến count ở makeCounter
+                            }
+                            return counter
+                        }
+                        let couter1=makeCounter();
+                        log(couter1()) -> 1
+                        log(couter1()) -> 2
+                        log(couter1()) -> 3
+

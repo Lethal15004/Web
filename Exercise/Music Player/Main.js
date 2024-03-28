@@ -44,78 +44,78 @@ const app={
             id:1,
             name:'Ánh Trăng Buồn',
             singer: 'Thành Đạt, Mixus',
-            path:'/Music Player/Music/AnhTrangBuonLofiCover-ThanhDatMixus-12399519.mp3',
-            image:'/Music Player/Img/1699867348489_500.jpg'
+            path:'../Music Player/Music/AnhTrangBuonLofiCover-ThanhDatMixus-12399519.mp3',
+            image:'../Music Player/Img/1699867348489_500.jpg'
         },
         {
             id:2,
             name:'Cố Giang Tình',
             singer: 'Hương Ly',
-            path:'/Music Player/Music/CoGiangTinhRemix-HuongLy-6316505.mp3',
-            image:'/Music Player/Img/1675925047627_500.jpg'
+            path:'../Music Player/Music/CoGiangTinhRemix-HuongLy-6316505.mp3',
+            image:'../Music Player/Img/1675925047627_500.jpg'
         },
         {
             id:3,
             name:'Cứu Vãn Kịp Không',
             singer: 'Vương Anh Tú',
-            path:'/Music Player/Music/CuuVanKipKhong-VuongAnhTu-7847996.mp3',
-            image:'/Music Player/Img/1662537457511_500.jpg'
+            path:'../Music Player/Music/CuuVanKipKhong-VuongAnhTu-7847996.mp3',
+            image:'../Music Player/Img/1662537457511_500.jpg'
         },
         {
             id:4,
             name:'Dáng Em',
             singer: 'Dương Edward',
-            path:'/Music Player/Music/DangEmLofiVersion-DuongEdward-7093196.mp3',
-            image:'/Music Player/Img/1679900698123_500.jpg'
+            path:'../Music Player/Music/DangEmLofiVersion-DuongEdward-7093196.mp3',
+            image:'../Music Player/Img/1679900698123_500.jpg'
         },
         {
             id:5,
             name:'Kiếp Má Hồng',
             singer: 'TLong, Lạc Khởi',
-            path:'/Music Player/Music/KiepMaHong-TLongLacKhoi-7205562.mp3',
-            image:'/Music Player/Img/1652069404851_500.jpg'
+            path:'../Music Player/Music/KiepMaHong-TLongLacKhoi-7205562.mp3',
+            image:'../Music Player/Img/1652069404851_500.jpg'
         },
         {
             id:6,
             name:'Khuê Mộc Lang',
             singer: 'Jombie, Hương Ly',
-            path:'/Music Player/Music/KhueMocLang-JombieHuongLy-7073372.mp3',
-            image:'/Music Player/Img/1629606274861_500.jpg'
+            path:'../Music Player/Music/KhueMocLang-JombieHuongLy-7073372.mp3',
+            image:'../Music Player/Img/1629606274861_500.jpg'
         },
         {
             id:7,
             name:'Người Tình Mùa Đông',
             singer: 'Đức Phúc, Mono',
-            path:'/Music Player/Music/NguoiTinhMuaDong-DucPhucMONODTAP-8343704.mp3',
-            image:'/Music Player/Img/1669712534560_500.jpg'
+            path:'../Music Player/Music/NguoiTinhMuaDong-DucPhucMONODTAP-8343704.mp3',
+            image:'../Music Player/Img/1669712534560_500.jpg'
         },
         {
             id:8,
             name:'Rượu Mừng Hóa Người Dưng',
             singer: 'TLong, ACV, Roller',
-            path:'/Music Player/Music/RuouMungHoaNguoiDungLofiVersion-TLongACVRoller-9830918.mp3',
-            image:'/Music Player/Img/1688196669077_500.jpg'
+            path:'../Music Player/Music/RuouMungHoaNguoiDungLofiVersion-TLongACVRoller-9830918.mp3',
+            image:'../Music Player/Img/1688196669077_500.jpg'
         },
         {
             id:9,
             name:'Thuyền Quyên',
             singer: 'Diệu Kiên, Cao Tri',
-            path:'/Music Player/Music/ThuyenQuyenLofiVer-DieuKienCaoTri-8520916.mp3',
-            image:'/Music Player/Img/1673239503736_500.jpg'
+            path:'../Music Player/Music/ThuyenQuyenLofiVer-DieuKienCaoTri-8520916.mp3',
+            image:'../Music Player/Img/1673239503736_500.jpg'
         },
         {
             id:10,
             name:'Until You',
             singer: 'Shayne Ward',
-            path:'/Music Player/Music/Until You - Shayne Ward (NhacPro.net).mp3',
-            image:'/Music Player/Img/1517189710456_500.jpg'
+            path:'../Music Player/Music/Until You - Shayne Ward (NhacPro.net).mp3',
+            image:'../Music Player/Img/1517189710456_500.jpg'
         },
         {
             id:11,
             name:'Why Not Me',
             singer: 'Enrique Iglesias',
-            path:'/Music Player/Music/Why Not Me - Enrique Iglesias (NhacPro.net).mp3',
-            image:'/Music Player/Img/1672900432639_500.jpg'
+            path:'../Music Player/Music/Why Not Me - Enrique Iglesias (NhacPro.net).mp3',
+            image:'../Music Player/Img/1672900432639_500.jpg'
         }
     ],
 

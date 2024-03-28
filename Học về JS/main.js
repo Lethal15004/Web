@@ -1,7 +1,7 @@
 //Khai bao hằng số
 const log=console.log;
 const logt=console.table;
-const tm=``
+const tm=``;
 
 // let buttonElement = document.querySelector('button');
 // function clickHandler(e){
@@ -314,19 +314,37 @@ const tm=``
 //     })
 // }
 
-const app={
-    getName:()=>{
-        return 'Hi'
-    },
-    handleEvent:()=>{
-        log(this.getName)
-    }
+//IIFE
+// (function Introduce(message,i){
+//     if(i==10)
+//         return;
+//     console.log(message)
+//     Introduce("Hello",++i)
+// })("Hello",0);
 
+// let app=(function(){
+//     let cars=[];
+//     return{
+//         getCar(index){
+//             return cars[index];
+//         },
+//         add(car){
+//             cars.push(car);
+//         },
+//         edit(index,car){
+//             cars[index]=car;
+//         },
+//         delete(index){
+//             cars.splice(index,1);
+//         }
+//     }   
+// })()
+    
+// app.add('BMW')
+// app.add('Ferrari')
+// log(app.getCar(1))
+
+{
+    var age=18;
 }
-app.handlEvents()
-
-
-
-
-
-
+log(age)

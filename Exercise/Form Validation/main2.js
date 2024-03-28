@@ -2,7 +2,7 @@ const log=console.log;
 const logt=console.table;
 const tm=``
 function Validator(idForm,parentCheck,formMessage,passWord){
-    let checkInputElement={}
+    let checkInputElement={};
     //Quy tắc tạo rule:
         // -Khi có lỗi thì trả ra message lỗi
         // -Nếu không có lỗi thì trả về undefined

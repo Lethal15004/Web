@@ -76,17 +76,27 @@ Part 3: ExpressJS
 Part 4: Web server 
     - Khác với JSON server bên JS cơ bản thì Web server yêu cầu NodeJS và ExpressJS
     - Để bắt đầu ta thực hiện như sau:
-        + Tạo 1 file server.js
+        + Tạo 1 folder mới
         + Thực hiện lệnh npm init
         + Điền các thông tin quan trọng nhất là entry point (file đầu vào)
-        + Thực hiện lệnh npm install express -> Cài ExpressJS
+        + Tạo file js có đúng nội dung entry point 
+        + Thực hiện lệnh npm install express                -> Cài ExpressJS
+        + Thực hiện lệnh npm install nodemon --save-dev     -> Cài Nodemon -> Để thay đổi thì chỉ refresh trang
+        + Vào file package.json thêm trong script 1 key value là:
+            "start":"nodemon --inspect tên_file.js", -> Cài inspect và debug
+        + Thực hiện lệnh npm install morgan --save-dev      -> Cài morgan  -> Để kiểm tra requests
+        + Thực hiện lệnh npm install express-handlebars     -> Cài handlebars -> Giúp quản lý dễ
+          Hoặc ta có thể cài pub npm install pug            -> Cài pug -> Giúp quản lý dễ 
+        + Khi ta khởi động server chỉ cần ghi npm start thay vì node tên_file.js
     - Đưa đoạn code sau: 
         const express = require('express') 
-            -> Yêu câu thư viện express sau khi cài ngay trên terminal
+        const morgan = require('morgan') 
+            -> Yêu câu thư viện express,morgan sau khi cài ngay trên terminal
         const app = express()
             -> Sau khi tạo biến express thì nó cũng là 1 function để chạy rồi gán vào biến app đại diện cho ứng dụng NodeJS
         const port = 3000   
             -> Website của bản thân chạy ở cổng nào
+        app.use(morgan('combined'))
         app.get('/trang-chu', (req, res) => {
             return res.send('Hello World!')
         })
@@ -97,19 +107,31 @@ Part 4: Web server
         })
             -> Đoạn này để chạy server ở cổng 3000 và in ra trong terminal
 --------------------------------------------------------------------------------------------------------------------------
-Part 5: Nodemon & Debug & Add Git
+Part 5: Nodemon & Debug & Add Git & Morgan
     1. Nodemon
         - Là 1 thư viện giúp tự động khởi động lại ứng dụng node khi file
           js thay đổi 
         - Giúp thay đổi file 1 cách nhanh chóng
-        - Cách Cài
-            + npm install nodemon --save-dev
-            + Vào file package.json thêm trong script 1 key value là:
-              "start":"nodemon --inspect tên_file.js",
-            + Khi ta khởi động server chỉ cần ghi npm start thay vì node tên_file.js
     2. Debug
         - Để debug thì ta vào inspect web có biểu tưởng NodeJS 
         - Nhấn vào thì ta có 1 phần console và 1 phần source, tìm file
         - Nếu muốn dừng phần nào thì nhấn vào phần đó
-* Chú ý: Part 4 và Part 5 là 2 Part quan trọng chuẩn bị 1 Project
-    3.Add Git
+    3.  Add Git -> Làm ở ngoài cho nhanh
+    4.  Morgan
+        - Là một thư viện giúp ta nhìn ra được request khi sử dụng Webserver
+        - Đơn giản hơn là khi request về server ta sẽ đọc được
+    * Chú ý: Part 4 và Part 5 là 2 Part quan trọng chuẩn bị 1 Project
+    - Cách để thêm thư viện trong NodeJS
+        ->  Example: const morgan = require('morgan') hay const express = require('express')
+            Ta sử dụng require
+        -> Đối với morgan ta cần sử dụng thêm app.use(morgan('combined'))
+--------------------------------------------------------------------------------------------------------------------------
+Part 6: Template Engine (Handlebars)
+    -   Là một công cụ cho phép bạn tạo và quản lý các template HTML một cách dễ dàng và hiệu quả. 
+        Mục đích chính của Template Engine như Handlebars bao gồm:
+        + Tách biệt logic và giao diện
+        + Tạo và quản lý template một cách hiệu quả
+        + Tích hợp dữ liệu động
+        + Tích hợp với các framework và thư viện JavaScript khác
+        + Tạo ra các trang web động và tương tác
+    - Tạo 1 folder resource trong này ta tạo 2 folder là scss và views. Và cái views là cái quyết định reder dữ liệu

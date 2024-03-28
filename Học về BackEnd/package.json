@@ -2,9 +2,9 @@
   "name": "learnnodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "start":"nodemon --inspect app.js",
+    "start": "nodemon --inspect src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -14,9 +14,11 @@
   "author": "huypham",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.1"
+    "express": "^4.19.1",
+    "express-handlebars": "^7.1.2"
   },
   "devDependencies": {
+    "morgan": "^1.10.0",
     "nodemon": "^3.1.0"
   }
 }
