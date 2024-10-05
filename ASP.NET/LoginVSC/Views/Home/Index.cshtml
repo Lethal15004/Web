@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="text-center">
+    @if(ViewBag == null)
+    {
+        <h1 class="display-4">Xin Chào</h1>
+    }
+    else
+    {
+        <h1 class="display-4">Xin Chào @ViewBag.Name</h1>
+    }
+</div>
+
+

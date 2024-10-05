@@ -1,0 +1,76 @@
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-4gsx13jonn] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-4gsx13jonn] {
+  color: #0077cc;
+}
+
+.btn-primary[b-4gsx13jonn] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-4gsx13jonn], .nav-pills .show > .nav-link[b-4gsx13jonn] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-4gsx13jonn] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-4gsx13jonn] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-4gsx13jonn] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-4gsx13jonn] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-4gsx13jonn] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+.navbar-nav[b-4gsx13jonn] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.left-items[b-4gsx13jonn] {
+  display: flex;
+}
+
+.right-item[b-4gsx13jonn] {
+  display: flex;
+  margin-left: auto; /* Đẩy phần tử này sang phải */
+}
+
+.nav-item[b-4gsx13jonn] {
+  list-style: none;
+}
+
+.nav-link[b-4gsx13jonn] {
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+
